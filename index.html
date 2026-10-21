@@ -3,1165 +3,870 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="이강일 — Java·Spring 백엔드 개발자. 투자·정산 플랫폼과 제조 현장 데이터 시스템을 만들고 운영해 온 경력과 사례.">
-<title>이강일 | 백엔드 개발자</title>
+<meta name="description" content="이강일, Java·Spring 백엔드 개발자. 제조 설비 데이터 파이프라인과 미국 투자 플랫폼을 만들고 운영해 온 대표 사례 다섯 가지.">
+<title>이강일 | 백엔드 포트폴리오</title>
+<!--
+  [포트폴리오 정본 · 2026-10-21] 웹과 PDF가 이 파일 하나에서 나온다.
+  - 화면 = 웹 페이지(반응형, 라이트·다크) / 인쇄 = A4 세로 9쪽 PDF(.page 하나가 한 쪽, 라이트 고정)
+  - .web-only 는 인쇄에서 숨김, .apply-only(전화번호)는 주소 끝에 #apply 를 붙였을 때만 보임 → 지원서 첨부용 PDF
+  - PDF: Chrome --headless=new --no-pdf-header-footer --virtual-time-budget=8000 --print-to-pdf=... "file://.../index.html#apply"
+  - 사실 경계 = resume_facts_confirmed_2026-09-14 메모. em dash · 원문자 금지. pitch = 사용자 소신, 변경 금지
+  - 지원본은 사례 순서만 바꾼다(section.case 통째 이동 + 목차·쪽 번호)
+-->
+<script>if(location.hash==='#apply')document.documentElement.classList.add('apply')</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&family=IBM+Plex+Sans+KR:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap">
 <style>
-/* Layout: 관제실 HMI — 설비 데이터가 흐르는 풀블리드 히어로, 그 아래 한 줄짜리 라인처럼 이어지는 1240px 컬럼 */
 :root{
-  --bg:#ECEEEA; --surface:#E1E4DF; --raise:#F7F8F5; --ink:#131719; --muted:#58626A; --line:#C6CBC5;
-  --accent:#C25700; --accent-ink:#FFFFFF; --run:#1B8A4B; --stop:#C5362A; --auto:#2F5FD0;
+  --bg:#ECEEEA; --paper:#FFFFFF; --raise:#F7F8F5;
+  --ink:#131719; --muted:#58626A; --faint:#7E878E; --line:#D3D8D2; --line-soft:#E6E9E4;
+  --accent:#C25700; --accent-soft:#FBEFE4; --run:#1B8A4B; --run-soft:#E6F4EC; --stop:#C5362A; --stop-soft:#FBEAE8; --auto:#2F5FD0; --auto-soft:#E9EFFC;
   --f-display:"Archivo","Helvetica Neue",Arial,sans-serif;
   --f-body:"IBM Plex Sans KR","Apple SD Gothic Neo","Malgun Gothic",system-ui,sans-serif;
   --f-mono:"JetBrains Mono",ui-monospace,"SFMono-Regular",Menlo,monospace;
-  --gutter:clamp(16px,4vw,48px);
-  --stream-opacity:.32;
 }
 @media (prefers-color-scheme: dark){
   :root:not([data-theme="light"]){
-    --bg:#0D1012; --surface:#141A1D; --raise:#192024; --ink:#E6E9E4; --muted:#8C979D; --line:#273036;
-    --accent:#FF9F1C; --accent-ink:#140A00; --run:#38D07A; --stop:#FF5B4F; --auto:#6FA0FF; --stream-opacity:.55; color-scheme:dark;
+    --bg:#0D1012; --paper:#141A1D; --raise:#192024; --ink:#E6E9E4; --muted:#8C979D; --faint:#6E7A81; --line:#2C363C; --line-soft:#212A2F;
+    --accent:#FF9F1C; --accent-soft:rgba(255,159,28,.12); --run:#38D07A; --run-soft:rgba(56,208,122,.12); --stop:#FF5B4F; --stop-soft:rgba(255,91,79,.13); --auto:#6FA0FF; --auto-soft:rgba(111,160,255,.12); color-scheme:dark;
   }
 }
 :root[data-theme="dark"]{
-  --bg:#0D1012; --surface:#141A1D; --raise:#192024; --ink:#E6E9E4; --muted:#8C979D; --line:#273036;
-  --accent:#FF9F1C; --accent-ink:#140A00; --run:#38D07A; --stop:#FF5B4F; --auto:#6FA0FF; --stream-opacity:.55; color-scheme:dark;
+  --bg:#0D1012; --paper:#141A1D; --raise:#192024; --ink:#E6E9E4; --muted:#8C979D; --faint:#6E7A81; --line:#2C363C; --line-soft:#212A2F;
+  --accent:#FF9F1C; --accent-soft:rgba(255,159,28,.12); --run:#38D07A; --run-soft:rgba(56,208,122,.12); --stop:#FF5B4F; --stop-soft:rgba(255,91,79,.13); --auto:#6FA0FF; --auto-soft:rgba(111,160,255,.12); color-scheme:dark;
 }
-*{box-sizing:border-box}
-html{scroll-behavior:auto}
-body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:16px;line-height:1.7;word-break:keep-all;overflow-wrap:break-word;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+/* 1rem = 화면 15px / 인쇄 12.5px */
+html{font-size:15px}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:1rem;line-height:1.7;word-break:keep-all;overflow-wrap:break-word;-webkit-font-smoothing:antialiased;overflow-x:hidden}
 a{color:inherit}
 :focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:4px}
-summary:focus-visible{outline-offset:-2px}
-.wrap{max-width:1240px;margin-inline:auto;padding-inline:var(--gutter)}
 .mono{font-family:var(--f-mono)}
-.eyebrow{font-family:var(--f-mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);display:flex;align-items:center;gap:10px;margin:0}
-.lamp{width:8px;height:8px;border-radius:50%;background:var(--run);box-shadow:0 0 0 0 var(--run);animation:lamp 2.4s infinite;flex:none}
-@keyframes lamp{0%{box-shadow:0 0 0 0 color-mix(in srgb,var(--run) 60%,transparent)}70%{box-shadow:0 0 0 10px transparent}100%{box-shadow:0 0 0 0 transparent}}
+.apply-only{display:none}
+html.apply .apply-only{display:revert}
 
-/* progress + nav */
-.progress{position:fixed;left:0;right:0;top:0;height:2px;z-index:60;pointer-events:none}
-.progress span{display:block;height:100%;background:var(--accent);transform-origin:0 50%;transform:scaleX(0)}
-.nav{position:fixed;top:0;left:0;right:0;z-index:50;padding-top:env(safe-area-inset-top,0px);background:color-mix(in srgb,var(--bg) 78%,transparent);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid color-mix(in srgb,var(--line) 60%,transparent)}
-.nav .wrap{display:flex;align-items:center;justify-content:space-between;height:56px;gap:16px}
-.brand{font-weight:700;text-decoration:none;font-size:15px;display:flex;align-items:baseline;gap:2px}
+/* ---------- web nav ---------- */
+.nav{position:sticky;top:0;z-index:50;background:color-mix(in srgb,var(--bg) 82%,transparent);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--line-soft)}
+.nav-in{max-width:960px;margin:0 auto;padding:0 24px;height:54px;display:flex;align-items:center;justify-content:space-between;gap:16px}
+.brand{font-weight:700;text-decoration:none;font-size:15px}
 .brand span{font-family:var(--f-mono);font-weight:400;color:var(--accent);font-size:12px}
-.nav nav{display:flex;gap:clamp(10px,2vw,28px);font-size:14px}
-.nav nav a{text-decoration:none;color:var(--muted);transition:color .2s}
-.nav nav a:hover,.nav nav a.on{color:var(--ink)}
-@media (max-width:640px){.nav nav a:not(.keep){display:none}}
+.nav nav{display:flex;align-items:center;gap:clamp(12px,2.4vw,26px);font-size:14px}
+.nav nav a{text-decoration:none;color:var(--muted)}
+.nav nav a:hover{color:var(--ink)}
+.nav .pdf{font-family:var(--f-mono);font-size:12px;color:var(--ink);border:1px solid var(--line);border-radius:999px;padding:4px 12px}
+@media (max-width:640px){.nav nav a.opt{display:none}}
 
-/* hero */
-.hero{position:relative;padding-block:clamp(96px,14vh,150px) 40px;overflow:hidden;isolation:isolate}
-#stream{position:absolute;inset:0;width:100%;height:100%;z-index:-1;opacity:var(--stream-opacity)}
-.hero-top{display:grid;gap:10px}
-.hero-grid{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:clamp(24px,4vw,64px);align-items:end;margin-top:clamp(24px,4vh,44px)}
-.name{font-size:clamp(44px,6.4vw,92px);line-height:1;margin:0;font-weight:700;letter-spacing:-.02em;display:flex}
-.name .m{display:inline-block;overflow:hidden;padding-bottom:.08em}
-.name .ch{display:inline-block}
-.lede{font-size:clamp(17px,1.6vw,20px);color:var(--ink);margin:18px 0 0;max-width:34em}
-.lede em{font-style:normal;color:var(--muted)}
-.cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px}
-.btn{display:inline-flex;align-items:center;gap:10px;padding:13px 22px;border-radius:999px;background:var(--ink);color:var(--bg);text-decoration:none;font-weight:600;font-size:15px;border:1.5px solid var(--ink);cursor:pointer;font-family:var(--f-body)}
-.btn.ghost{background:transparent;color:var(--ink)}
-.btn .arr{font-family:var(--f-mono);transition:transform .25s}
-.btn:hover .arr{transform:translateX(4px)}
-.term{background:color-mix(in srgb,var(--raise) 88%,transparent);border:1px solid var(--line);border-radius:12px;overflow:hidden;backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);min-width:0}
-.term-bar{display:flex;align-items:center;gap:6px;padding:10px 14px;border-bottom:1px solid var(--line);font-family:var(--f-mono);font-size:11px;color:var(--muted)}
-.term-bar i{width:9px;height:9px;border-radius:50%;background:var(--line)}
-.term-bar i:nth-child(1){background:var(--stop)}.term-bar i:nth-child(2){background:var(--accent)}.term-bar i:nth-child(3){background:var(--run)}
-.term-bar span{margin-left:8px}
-#term{margin:0;padding:14px 16px;font-family:var(--f-mono);font-size:12.5px;line-height:1.75;overflow:hidden;white-space:pre-wrap;word-break:break-all;color:var(--ink)}
-#term .p{color:var(--accent)} #term .d{color:var(--muted)} #term .ok{color:var(--run)} #term .ng{color:var(--stop)}
-#term .caret{display:inline-block;width:.6em;height:1.1em;vertical-align:-2px;background:var(--accent);animation:blink 1s steps(1) infinite}
-@keyframes blink{50%{opacity:0}}
-@media (max-width:860px){
-  .hero-grid{grid-template-columns:1fr;align-items:start}
-  #term{font-size:11.5px}
-  #stream{opacity:calc(var(--stream-opacity) * .45)}
-}
+/* ---------- page frame (화면) ---------- */
+.page{max-width:960px;margin:0 auto;padding:72px 24px;position:relative;border-bottom:1px solid var(--line-soft)}
+.page-body{display:flex;flex-direction:column}
+.foot{display:none}
 
+/* shared */
+.eyebrow{font-family:var(--f-mono);font-size:.84rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);display:flex;align-items:center;gap:8px}
+.lamp{width:7px;height:7px;border-radius:50%;background:var(--run);flex:none}
+.h2{font-size:1.84rem;line-height:1.3;letter-spacing:-.02em;font-weight:700;margin-top:6px;text-wrap:balance}
+.lede{font-size:1.08rem;margin-top:10px}
+.kick{font-family:var(--f-mono);font-size:.8rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:8px;display:flex;align-items:center;gap:8px}
+.kick::after{content:"";flex:1;height:1px;background:var(--line-soft)}
+.note{font-size:.8rem;color:var(--faint);margin-top:8px}
 
-/* sections */
-.sec{padding-block:clamp(80px,12vh,140px)}
-.sec-head{display:grid;gap:14px;margin-bottom:clamp(36px,6vh,64px)}
-.h2{font-size:clamp(30px,4.2vw,56px);line-height:1.18;letter-spacing:-.02em;margin:0;font-weight:700;text-wrap:balance;max-width:20em}
-.h2 .w{display:inline-block;overflow:hidden;vertical-align:top;padding-bottom:.06em;margin-bottom:-.06em}
-.h2 .w > span{display:inline-block}
-.sub{color:var(--muted);max-width:40em;margin:0}
+/* cover */
+.cover .page-body{justify-content:space-between;gap:40px}
+.pitch{font-size:1.08rem;color:var(--accent);font-weight:600;margin-top:40px}
+.name{font-size:clamp(3.6rem,10vw,6.1rem);line-height:1;font-weight:700;letter-spacing:-.02em;margin-top:12px}
+.role{font-size:1.2rem;font-weight:600;margin-top:14px}
+.cover .lede{max-width:34em;color:var(--muted);margin-top:12px}
+.facts{display:grid;grid-template-columns:6.2rem 1fr;border-top:1.5px solid var(--ink);margin-top:36px}
+.facts dt,.facts dd{padding:.62rem 0;border-bottom:1px solid var(--line-soft)}
+.facts dt{font-family:var(--f-mono);font-size:.8rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);padding-top:.8rem}
+.facts dd{font-size:1.04rem}
+.facts dd small{color:var(--muted);font-size:.92rem}
+.impact{margin-top:40px}
+.bars{display:grid;gap:12px}
+.bar{display:grid;grid-template-columns:12rem 1fr 8.4rem;gap:12px;align-items:center}
+.bar.s1{grid-template-columns:5.6rem 1fr 4.8rem}
+.bar.s2{grid-template-columns:5.6rem 1fr 8.4rem}
+.bar .lbl{font-size:.96rem;font-weight:600;line-height:1.35}
+.bar .lbl small{display:block;font-weight:400;color:var(--muted);font-size:.8rem;font-family:var(--f-mono)}
+.track{height:10px;border-radius:5px;background:var(--line-soft);position:relative;overflow:hidden}
+.track i{position:absolute;inset:0 auto 0 0;background:var(--accent);border-radius:5px}
+.track i.before{background:var(--faint)}
+.bar .val{font-family:var(--f-mono);font-size:.96rem;text-align:right;white-space:nowrap}
+.bar .val b{color:var(--accent);font-size:1.12rem}
+.contact{display:flex;flex-wrap:wrap;gap:6px 22px;font-family:var(--f-mono);font-size:.92rem;border-top:1px solid var(--line);padding-top:12px}
+.contact span{color:var(--muted)}
+.contact a{text-decoration:none}
 
-/* about */
-.statement{font-size:clamp(24px,3.1vw,42px);line-height:1.4;font-weight:600;letter-spacing:-.015em;margin:0 0 clamp(48px,8vh,88px);max-width:26em;text-wrap:balance}
-.statement .sw{color:var(--ink);transition:color .3s}
-.about-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(20px,3vw,40px);border-top:1px solid var(--line);padding-top:32px}
-.about-grid h3{font-size:13px;font-family:var(--f-mono);letter-spacing:.12em;text-transform:uppercase;color:var(--accent);margin:0 0 6px;font-weight:600}
-.about-grid .when{font-family:var(--f-mono);font-size:12px;color:var(--muted);margin:0 0 12px}
-.about-grid p{margin:0;font-size:15.5px}
-@media (max-width:860px){.about-grid{grid-template-columns:1fr}}
+/* career overview */
+.co{display:grid;grid-template-columns:9.4rem 1fr;gap:4px 18px;padding:1rem 0;border-bottom:1px solid var(--line-soft)}
+.co:first-of-type{border-top:1.5px solid var(--ink)}
+.co .when{font-family:var(--f-mono);font-size:.84rem;color:var(--muted);padding-top:3px;line-height:1.5}
+.co h3{font-size:1.24rem;font-weight:700;display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+.co h3 small{font-size:.96rem;font-weight:500;color:var(--accent)}
+.co .prod{font-size:.96rem;color:var(--muted);margin:3px 0 6px}
+.co ul{list-style:none;display:grid;gap:3px}
+.co li{padding-left:13px;position:relative;font-size:.96rem}
+.co li::before{content:"";position:absolute;left:0;top:.62em;width:5px;height:5px;background:var(--ink);border-radius:1px}
+.edu{font-size:.92rem;color:var(--muted);margin-top:10px;display:flex;flex-wrap:wrap;gap:4px 18px}
+.idx{width:100%;border-collapse:collapse}
+.idx th{font-family:var(--f-mono);font-size:.76rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);text-align:left;font-weight:400;padding:6px 8px;border-bottom:1.5px solid var(--ink)}
+.idx td{padding:.72rem 8px;border-bottom:1px solid var(--line-soft);vertical-align:top;font-size:.96rem}
+.idx td:first-child{font-family:var(--f-mono);color:var(--accent);font-weight:600;width:2.7rem}
+.idx td.r{font-family:var(--f-mono);font-size:.88rem;white-space:nowrap}
+.idx td.p{font-family:var(--f-mono);color:var(--muted);text-align:right;width:2.4rem}
+.idx .co-name{display:block;color:var(--muted);font-size:.84rem}
+.idx a{text-decoration:none}
+.idx a:hover{color:var(--accent)}
 
-/* impact */
-.impact{display:grid;gap:0;border-top:1px solid var(--ink)}
-.row{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1.6fr) minmax(0,.9fr);gap:clamp(16px,3vw,40px);align-items:center;padding-block:28px;border-bottom:1px solid var(--line)}
-.row h3{margin:0;font-size:clamp(17px,1.5vw,20px);font-weight:600;line-height:1.4}
-.row .ctx{font-size:13.5px;color:var(--muted);margin:4px 0 0}
-.bar{position:relative;height:38px;border-radius:6px;background:var(--surface);overflow:hidden}
-.bar .before{position:absolute;inset:0;border:1.5px dashed var(--line);border-radius:6px}
-.bar .fill{position:absolute;left:0;top:0;bottom:0;background:var(--accent);border-radius:6px;transform-origin:0 50%}
-.bar .tag{position:absolute;right:10px;top:50%;transform:translateY(-50%);font-family:var(--f-mono);font-size:11px;color:var(--muted)}
-.val{font-family:var(--f-display);font-variation-settings:"wdth" 100,"wght" 700;font-size:clamp(26px,2.8vw,40px);line-height:1;text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums}
-.val small{display:block;font-family:var(--f-mono);font-size:12px;color:var(--muted);font-variation-settings:normal;font-weight:400;margin-bottom:8px}
-.val b{color:var(--accent);font-weight:inherit}
-.impact-note{font-size:12.5px;color:var(--muted);margin:16px 0 0;font-family:var(--f-mono)}
-@media (max-width:860px){.row{grid-template-columns:1fr;gap:12px}.val{text-align:left}}
+/* case */
+.case-head{display:grid;grid-template-columns:1fr auto;gap:18px;align-items:end;padding-bottom:12px;border-bottom:1.5px solid var(--ink)}
+.case-no{font-family:var(--f-display);font-weight:800;font-size:1.04rem;color:var(--accent);letter-spacing:.04em}
+.case-meta{font-family:var(--f-mono);font-size:.8rem;color:var(--muted);letter-spacing:.06em;margin-left:8px}
+.metric{text-align:right}
+.metric b{display:block;font-family:var(--f-display);font-weight:800;font-size:2.24rem;line-height:1;letter-spacing:-.01em;color:var(--accent);white-space:nowrap}
+.metric span{font-family:var(--f-mono);font-size:.76rem;color:var(--muted);letter-spacing:.08em;text-transform:uppercase}
+.case .lede{margin-top:12px}
+.boundary{margin-top:10px;font-size:.92rem;background:var(--auto-soft);border-left:3px solid var(--auto);padding:7px 11px;border-radius:0 6px 6px 0}
+.boundary b{color:var(--auto)}
+.fig{margin-top:14px;border:1px solid var(--line);border-radius:10px;background:var(--raise);padding:14px 14px 10px}
+.fig figcaption{font-family:var(--f-mono);font-size:.76rem;color:var(--muted);margin-top:8px;letter-spacing:.04em}
+.fig svg{display:block;width:100%;height:auto}
+.pjar{margin-top:14px;display:grid;grid-template-columns:4.8rem 1fr;border-top:1px solid var(--line)}
+.pjar dt,.pjar dd{padding:.62rem 0;border-bottom:1px solid var(--line-soft)}
+.pjar dt{font-family:var(--f-mono);font-size:.8rem;letter-spacing:.08em;color:var(--muted);padding-top:.8rem}
+.pjar dt.res{color:var(--run);font-weight:600}
+.pjar dd.res{font-weight:600}
+.pjar dd ul{list-style:none;display:grid;gap:3px}
+.pjar dd li{padding-left:12px;position:relative}
+.pjar dd li::before{content:"";position:absolute;left:0;top:.65em;width:4px;height:4px;background:var(--muted);border-radius:50%}
+.sub{margin-top:18px}
+.sub-h{display:flex;align-items:baseline;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.sub-h h3{font-size:1.2rem;font-weight:700}
+.sub-h h3 small{font-family:var(--f-mono);font-size:.8rem;color:var(--muted);font-weight:400;margin-left:8px}
+.sub-h .v{font-family:var(--f-mono);font-size:1.04rem;white-space:nowrap}
+.sub-h .v b{color:var(--accent);font-size:1.28rem}
+.sub .pjar{margin-top:8px}
+.take{margin-top:22px}
+.take p:last-child{font-size:1rem}
 
-/* pipeline */
-.pipe-grid{display:grid;grid-template-columns:minmax(0,.85fr) minmax(0,1.4fr);gap:clamp(24px,4vw,64px);align-items:start}
-.steps{display:grid}
-.step{min-height:62vh;padding-block:24px;display:flex;flex-direction:column;justify-content:center;opacity:.38;transition:opacity .4s}
-.step.on{opacity:1}
-.step .k{font-family:var(--f-mono);font-size:12px;color:var(--accent);letter-spacing:.1em;margin:0 0 10px}
-.step h3{font-size:clamp(22px,2.2vw,28px);margin:0 0 12px;line-height:1.3}
-.step p{margin:0;color:var(--ink);font-size:15.5px}
-.step ul{margin:14px 0 0;padding:0;list-style:none;font-size:15px;display:grid;gap:7px}
-.step li{position:relative;padding-left:16px}
-.step li::before{content:"";position:absolute;left:2px;top:.62em;width:6px;height:6px;border-radius:1px;background:var(--accent)}
-.stage{position:sticky;top:76px;min-width:0}
-.stage-box{background:var(--raise);border:1px solid var(--line);border-radius:14px;padding:clamp(10px,1.6vw,20px)}
-#pipe{width:100%;height:auto;display:block}
-#pipe .node rect{fill:var(--surface);stroke:var(--line);stroke-width:1.2}
-#pipe .node .t{fill:var(--ink);font-family:var(--f-body);font-size:15px;font-weight:600}
-#pipe .node .s{fill:var(--muted);font-family:var(--f-mono);font-size:11px}
-#pipe .edge{stroke:var(--line);stroke-width:1.5;fill:none}
-#pipe .lane{stroke:var(--line);stroke-width:1.2;stroke-dasharray:3 5}
-#pipe .retry{stroke:var(--stop);stroke-dasharray:6 6;animation:dash 1.2s linear infinite;opacity:.8}
-@keyframes dash{to{stroke-dashoffset:-24}}
-#pipe .lbl{fill:var(--muted);font-family:var(--f-mono);font-size:11px}
-#pipe .lbl.r{fill:var(--stop)}
-#pipe .off{fill:var(--accent);font-family:var(--f-mono);font-size:11px}
-#pipe .msg{fill:var(--accent)} #pipe .msg.ok{fill:var(--run)} #pipe .msg.ng{fill:var(--stop)} #pipe .msg.raw{fill:var(--muted)}
-#pipe .badge rect{fill:var(--bg);stroke:var(--line)}
-#pipe .badge text{font-family:var(--f-mono);font-size:11px;font-weight:600;fill:var(--muted)}
-#pipe [data-g]{transition:opacity .45s}
-#pipe[data-focus="1"] [data-g]:not([data-g~="1"]),
-#pipe[data-focus="2"] [data-g]:not([data-g~="2"]),
-#pipe[data-focus="3"] [data-g]:not([data-g~="3"]){opacity:.28}
-.counters{display:flex;flex-wrap:wrap;gap:8px 22px;margin-top:12px;font-family:var(--f-mono);font-size:12px;color:var(--muted)}
-.counters b{color:var(--ink);font-variant-numeric:tabular-nums}
-.counters .c-ok b{color:var(--run)} .counters .c-ng b{color:var(--stop)} .counters .c-re b{color:var(--accent)}
-.plog{margin:10px 0 0;font-family:var(--f-mono);font-size:11.5px;color:var(--muted);height:4.8em;overflow:hidden;line-height:1.6;white-space:nowrap}
-.plog .ok{color:var(--run)} .plog .ng{color:var(--stop)} .plog .re{color:var(--accent)}
-.demo-note{font-family:var(--f-mono);font-size:11px;color:var(--muted);margin:8px 0 0}
-@media (max-width:900px){
-  .pipe-grid{grid-template-columns:1fr}
-  .stage{top:60px;z-index:2;order:-1;background:var(--bg);padding-bottom:8px}
-  .step{min-height:auto;padding-block:28px;opacity:1}
-  .plog{display:none}
-}
+/* flow chips */
+.flow{display:flex;align-items:center}
+.flow + .flow{margin-top:10px}
+.flow .tag-l{font-family:var(--f-mono);font-size:.76rem;color:var(--muted);width:2.7rem;flex:none;letter-spacing:.08em}
+.nd{border:1px solid var(--line);background:var(--paper);border-radius:7px;padding:6px 9px;font-size:.88rem;line-height:1.35;text-align:center;flex:1 1 0;min-width:0}
+.nd small{display:block;font-family:var(--f-mono);font-size:.72rem;color:var(--muted)}
+.nd.hot{border-color:var(--stop);background:var(--stop-soft)}
+.nd.ok{border-color:var(--run);background:var(--run-soft)}
+.nd.key{border-color:var(--accent);background:var(--accent-soft)}
+.ar{flex:0 0 18px;height:1px;background:var(--muted);position:relative}
+.ar::after{content:"";position:absolute;right:-1px;top:-3px;border:3.5px solid transparent;border-left:5px solid var(--muted);border-right:0}
 
-/* work */
-.work-pin{display:block}
-.work-top{display:flex;justify-content:space-between;align-items:end;gap:24px;flex-wrap:wrap}
-.counter{font-family:var(--f-display);font-variation-settings:"wdth" 70,"wght" 300;font-size:clamp(40px,5vw,72px);line-height:1;color:var(--muted);font-variant-numeric:tabular-nums;display:none}
-.counter b{color:var(--ink);font-weight:inherit}
-.track{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}
-.card{background:var(--raise);border:1px solid var(--line);border-radius:16px;padding:clamp(22px,2.4vw,32px);display:flex;flex-direction:column;gap:16px;min-width:0;transform-style:preserve-3d;will-change:transform}
-.card .meta{display:flex;justify-content:space-between;gap:12px;font-family:var(--f-mono);font-size:11.5px;color:var(--muted);letter-spacing:.06em}
-.card .meta b{color:var(--accent);font-weight:600}
-.card h3{font-size:clamp(20px,1.9vw,25px);line-height:1.35;margin:0;text-wrap:balance}
-.card .res{font-family:var(--f-display);font-variation-settings:"wdth" 92,"wght" 700;font-size:clamp(24px,2.4vw,32px);line-height:1.15;color:var(--accent);margin:0}
-.card dl{margin:0;display:grid;grid-template-columns:auto minmax(0,1fr);gap:8px 14px;font-size:14.5px;line-height:1.6}
-.card dt{font-family:var(--f-mono);font-size:11px;color:var(--muted);padding-top:4px;letter-spacing:.08em}
-.card dd{margin:0}
-.spans{display:grid;gap:8px;margin-top:4px}
-.spans .sr{display:grid;grid-template-columns:52px minmax(0,1fr);gap:10px;align-items:center;font-family:var(--f-mono);font-size:11px;color:var(--muted)}
-.spans .sb{display:flex;height:20px;border-radius:4px;overflow:hidden;background:var(--surface)}
-.spans .sb i{display:block;height:100%}
-.spans .sb .cls{background:var(--stop)} .spans .sb .rest{background:var(--line)} .spans .sb .cls.after{background:var(--run)}
-.spans .axis{position:relative;height:14px;margin-left:62px}
-.spans .axis span{position:absolute;transform:translateX(-50%);font-family:var(--f-mono);font-size:10px;color:var(--muted)}
-.spans .legend{display:flex;gap:14px;font-family:var(--f-mono);font-size:10.5px;color:var(--muted);flex-wrap:wrap}
-.spans .legend i{display:inline-block;width:9px;height:9px;border-radius:2px;margin-right:5px;vertical-align:-1px}
-.work-sec.is-h .work-pin{height:100vh;display:flex;flex-direction:column;justify-content:center;overflow:hidden}
-.work-sec.is-h .counter{display:block}
-.work-sec.is-h .track{display:flex;grid-template-columns:none;gap:24px;padding-right:var(--gutter)}
-.work-sec.is-h .card{flex:none;width:min(540px,40vw);max-height:calc(100vh - 230px);overflow:hidden}
-@media (max-width:760px){.track{grid-template-columns:1fr}}
+/* svg (테마 토큰) */
+.s-box{fill:var(--paper);stroke:var(--line)}
+.s-strong{fill:var(--paper);stroke:var(--ink);stroke-width:1.3}
+.s-key{fill:var(--accent-soft);stroke:var(--accent)}
+.s-ok{fill:var(--run-soft);stroke:var(--run)}
+.s-t{fill:var(--ink)} .s-m{fill:var(--muted)} .s-acc{fill:var(--accent)} .s-ng{fill:var(--stop)}
+.s-ln{stroke:var(--muted);fill:none} .s-lnacc{stroke:var(--accent);fill:none}
+.s-mk{fill:var(--muted)} .s-mkacc{fill:var(--accent)}
+.fig-m{display:none}
 
-/* pillars */
-.statement.pitch{font-size:clamp(28px,4vw,54px);line-height:1.25;margin-bottom:18px;max-width:16em}
-.pitch-sub{margin:0 0 clamp(36px,6vh,56px)}
-.pillars{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
-.pillar{background:var(--raise);border:1px solid var(--line);border-radius:16px;padding:22px;display:flex;flex-direction:column;gap:16px;min-width:0}
-.pillar header{display:grid;gap:10px}
-.pillar h3{margin:0;font-size:clamp(19px,1.7vw,22px);line-height:1.35}
-.pn{justify-self:start;font-family:var(--f-mono);font-size:12px;font-weight:600;letter-spacing:.08em;padding:4px 10px;border-radius:999px;color:var(--accent-ink)}
-.tg-c{background:var(--run)} .tg-r{background:var(--accent)} .tg-a{background:var(--auto)}
-.pv{display:grid;gap:8px}
-.pv-k{margin:4px 0 0;font-family:var(--f-mono);font-size:11px;color:var(--muted)}
-.pv .mf{padding:10px}
-.ladder{grid-template-columns:repeat(4,minmax(0,1fr));align-items:end;height:150px;gap:8px;padding:12px;background:var(--surface);border-radius:12px}
-.lad{height:var(--h);background:var(--line);border-radius:8px 8px 4px 4px;display:flex;flex-direction:column;justify-content:flex-end;padding:8px 6px;gap:2px;min-width:0;transform-origin:bottom}
-.lad b{font-size:12.5px;line-height:1.2}
-.lad span{font-family:var(--f-mono);font-size:10px;color:var(--muted)}
-.lad.on{background:var(--accent);color:var(--accent-ink)}
-.lad.on span{color:inherit;opacity:.8}
-.pgo{margin-top:auto;align-self:flex-start;background:none;border:0;padding:4px 0;font:600 14px var(--f-body);color:var(--accent);cursor:pointer}
-.pgo:hover{text-decoration:underline}
-@media (max-width:960px){.pillars{grid-template-columns:1fr}}
+/* team (case 05) */
+.two{display:grid;grid-template-columns:1fr 26px 1fr;margin-top:14px;align-items:stretch}
+.col{border:1px solid var(--line);border-radius:10px;padding:13px 14px;background:var(--raise)}
+.col h3{font-size:1.12rem;font-weight:700}
+.col .when{font-family:var(--f-mono);font-size:.8rem;color:var(--muted);margin-bottom:8px}
+.col ul{list-style:none;display:grid;gap:8px}
+.col li{font-size:.92rem;line-height:1.55}
+.col li b{display:block;font-size:.96rem}
+.col li .to{color:var(--run);font-weight:600}
+.bridge{display:flex;align-items:center;justify-content:center;font-family:var(--f-mono);color:var(--accent);font-size:1.28rem}
 
-/* team */
-.team{display:grid;gap:6px;padding:14px;border-radius:12px;background:var(--surface)}
-.tm{display:grid;grid-template-columns:52px minmax(0,1fr) auto;align-items:center;gap:10px;font-size:12.5px}
-.tm-k{font-family:var(--f-mono);font-size:11px;color:var(--muted)}
-.tm-d{display:flex;gap:5px}
-.tm-d i{width:14px;height:14px;border-radius:50%;border:2px solid var(--accent);background:transparent}
-.tm-d i.me{background:var(--accent)}
-.tm b{font-family:var(--f-mono);font-size:11px;color:var(--muted);font-weight:400}
-.tm-note{margin:4px 0 0;font-size:11.5px;color:var(--muted)}
+/* more */
+.more{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:14px}
+.mi{border:1px solid var(--line);border-radius:9px;padding:10px 12px;background:var(--paper)}
+.mi h3{font-size:1rem;font-weight:700;line-height:1.4}
+.mi .when{font-family:var(--f-mono);font-size:.76rem;color:var(--muted);margin:1px 0 5px}
+.mi p{font-size:.88rem;line-height:1.55}
+.mi p + p{margin-top:3px}
+.mi .k{font-family:var(--f-mono);font-size:.76rem;color:var(--muted);margin-right:5px}
+.mi .k.r{color:var(--run);font-weight:600}
+.more-x{margin-top:12px}
+.more-x summary{cursor:pointer;font-family:var(--f-mono);font-size:.88rem;color:var(--ink);border:1px solid var(--line);border-radius:999px;padding:6px 14px;display:inline-block;list-style:none}
+.more-x summary::-webkit-details-marker{display:none}
+.more-x[open] summary{margin-bottom:2px}
+.stack{margin-top:16px;display:grid;grid-template-columns:7.6rem 1fr;gap:6px 12px;align-items:baseline}
+.stack dt{font-family:var(--f-mono);font-size:.76rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.stack dd{font-size:.92rem}
+.stack dd.pri{font-weight:600}
+.copy-btn{font-family:var(--f-mono);font-size:.84rem;border:1px solid var(--line);background:transparent;color:var(--ink);border-radius:999px;padding:5px 14px;cursor:pointer;margin-top:16px}
+.copied{font-family:var(--f-mono);font-size:.8rem;color:var(--run);margin-left:10px}
 
-/* filters + tags */
-.filters{display:flex;flex-wrap:wrap;gap:8px;margin-top:-20px;margin-bottom:28px}
-.filters button{display:inline-flex;align-items:center;gap:7px;padding:8px 14px;border-radius:999px;border:1.5px solid var(--line);background:var(--raise);color:var(--ink);font:600 14px var(--f-body);cursor:pointer}
-.filters button i{font-style:normal;font-family:var(--f-mono);font-size:11px;color:var(--muted)}
-.filters button.on{border-color:var(--ink);background:var(--ink);color:var(--bg)}
-.filters button.on i{color:inherit;opacity:.7}
-.dot{width:9px;height:9px;border-radius:50%;display:inline-block}
-.card .meta b.tg,.tg{display:inline-block;font-family:var(--f-body);font-size:11px;font-weight:700;padding:2px 8px;border-radius:999px;margin-right:2px;color:var(--accent-ink);letter-spacing:.02em}
-.card .meta > span:first-child{display:flex;flex-wrap:wrap;align-items:center;gap:4px}
-.card[hidden]{display:none}
-.pipe-fallback{margin:12px 0 0;font-size:14px;color:var(--muted)}
-.more-cases{display:flex;justify-content:center;margin-top:28px}
-#track .card{scroll-margin-top:80px}
-.more-cases[hidden]{display:none}
-.prob{margin:0;font-size:14.5px;line-height:1.6;display:grid;grid-template-columns:auto minmax(0,1fr);gap:12px}
-.prob span{font-family:var(--f-mono);font-size:11px;color:var(--muted);padding-top:3px;letter-spacing:.08em}
-.steps-line{list-style:none;margin:0;padding:0 0 0 14px;display:grid;gap:12px;border-left:2px solid var(--line)}
-.steps-line li{position:relative;display:grid;gap:2px}
-.steps-line li::before{content:"";position:absolute;left:-20px;top:6px;width:10px;height:10px;border-radius:50%;background:var(--raise);border:2px solid var(--accent)}
-.steps-line li:last-child::before{background:var(--accent)}
-.sk,.sk2{font-family:var(--f-mono);font-size:11px;color:var(--accent);letter-spacing:.08em}
-.sk2{margin:0 0 -6px}
-.sv{font-size:14.5px;line-height:1.6}
-.steps-line li:last-child .sv{font-weight:600}
-.note{margin:0;font-size:12.5px;color:var(--muted);padding-left:10px;border-left:2px solid var(--line)}
-.abody .steps-line{max-width:52em}
-.abody{display:grid;gap:14px}
-
-/* card details */
-.track{align-items:start}
-.more{border-top:1px dashed var(--line);margin-top:2px}
-.more summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;align-items:center;padding-top:12px;font-family:var(--f-mono);font-size:12px;letter-spacing:.08em;color:var(--accent)}
-.more summary::-webkit-details-marker{display:none}
-.more .pm{position:relative;width:12px;height:12px}
-.more .pm::before,.more .pm::after{content:"";position:absolute;left:0;top:5px;width:12px;height:2px;background:var(--accent);transition:transform .3s}
-.more .pm::after{transform:rotate(90deg)}
-.more[open] .pm::after{transform:rotate(0)}
-.more[open] summary span::after{content:" 접기"}
-.more[open] summary span{font-size:0}
-.more[open] summary span::after{font-size:12px}
-.more-body{display:grid;gap:16px;padding-top:14px;animation:open .35s ease}
-.more-body dl{margin:0;display:grid;grid-template-columns:auto minmax(0,1fr);gap:8px 14px;font-size:14.5px;line-height:1.65}
-.more-body dt{font-family:var(--f-mono);font-size:11px;color:var(--muted);padding-top:4px;letter-spacing:.08em}
-.more-body dd{margin:0}
-@keyframes open{from{opacity:0;transform:translateY(-6px)}}
-/* mini flow: 노드 + 연결선 스테퍼. 칸 안에서만 글자가 감기고 화살표가 줄 끝에 남지 않음 */
-.mf{display:grid;gap:14px;padding:16px 14px 14px;border-radius:12px;background:var(--surface)}
-.mf-row{display:grid;grid-template-columns:auto minmax(0,1fr);gap:12px;align-items:start}
-.mf-k{font-family:var(--f-mono);font-size:10.5px;font-weight:600;color:var(--muted);letter-spacing:.06em;line-height:1;padding:4px 6px;border-radius:4px;border:1px solid var(--line);background:var(--raise);margin-top:1px}
-.mf-k:empty{display:none}
-.mf-row:has(.mf-k:empty){grid-template-columns:minmax(0,1fr)}
-.mf-row ol{display:grid;grid-auto-flow:column;grid-auto-columns:minmax(0,1fr);list-style:none;margin:0;padding:0;isolation:isolate}
-.mf-row li{position:relative;padding:22px 3px 0;text-align:center;font-size:12.5px;font-weight:600;line-height:1.35;color:var(--ink);text-wrap:balance}
-.mf-row li::before{content:"";position:absolute;top:2px;left:50%;width:14px;height:14px;margin-left:-7px;border-radius:50%;background:var(--raise);border:2px solid var(--muted);box-sizing:border-box;z-index:1}
-.mf-row li:not(:last-child)::after{content:"";position:absolute;top:8px;left:50%;width:100%;height:2px;z-index:0;
-  background:linear-gradient(90deg,var(--line) 0 35%,var(--accent) 50%,var(--line) 65% 100%) 0 0/300% 100%;animation:flow 2.2s linear infinite}
-.mf-row.slow li:not(:last-child)::after{background:repeating-linear-gradient(90deg,var(--muted) 0 4px,transparent 4px 8px);opacity:.55;animation:none}
-.mf-row li.good{color:var(--accent)}
-.mf-row li.good::before{background:var(--accent);border-color:var(--accent);box-shadow:0 0 0 4px color-mix(in srgb,var(--accent) 22%,transparent)}
-.mf-row li.bad{color:var(--stop)}
-.mf-row li.bad::before{background:var(--stop);border-color:var(--stop)}
-.mf-row li.warn::before{border-style:dashed}
-@keyframes flow{from{background-position:100% 0}to{background-position:0 0}}
-@media (prefers-reduced-motion: reduce){.mf-row li::after{animation:none!important}}
-
-/* 조치 목록: 긴 문구를 알약 대신 목록으로 */
-.chips{list-style:none;margin:0;padding:0;display:grid;gap:7px}
-.chips li{position:relative;padding-left:16px;font-size:14px;line-height:1.5;color:var(--ink)}
-.chips li::before{content:"";position:absolute;left:2px;top:.6em;width:6px;height:6px;border-radius:1px;background:var(--accent)}
-.pillar .chips{gap:8px;padding-top:14px;border-top:1px solid var(--line)}
-.pillar .chips li{font-size:14px;color:var(--muted)}
-
-/* case card: 왼쪽 제목·결과 / 오른쪽 문제·그림·상세 */
-.track{grid-template-columns:minmax(0,1fr)!important;gap:16px}
-.card{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:clamp(20px,4vw,56px);padding:clamp(22px,3vw,36px);transition:border-color .25s}
-.card:hover{border-color:color-mix(in srgb,var(--accent) 45%,var(--line))}
-.c-head{display:flex;flex-direction:column;gap:12px;min-width:0}
-.c-head .meta{flex-direction:column;gap:8px;justify-content:flex-start}
-.c-head .meta > span:last-child{color:var(--muted)}
-.card .res{margin-top:4px;font-size:clamp(28px,3vw,42px)}
-.c-body{display:flex;flex-direction:column;gap:16px;min-width:0}
-.prob{font-size:15.5px!important;line-height:1.65!important}
-.prob span{color:var(--stop)!important}
-.card .more{margin-top:0}
-.card .more-body .chips{grid-template-columns:repeat(2,minmax(0,1fr));column-gap:24px}
-@media (max-width:860px){
-  .card{grid-template-columns:minmax(0,1fr);gap:16px}
-  .card .more-body .chips{grid-template-columns:minmax(0,1fr)}
-}
-
-/* archive */
-.arch{border-top:1px solid var(--ink)}
-.arow{display:grid;grid-template-columns:110px minmax(0,1fr) minmax(0,.7fr) 22px;gap:16px;padding:18px 12px;border-bottom:1px solid var(--line);align-items:baseline;background:linear-gradient(var(--surface),var(--surface)) no-repeat 0 0/0% 100%;transition:background-size .45s cubic-bezier(.2,.8,.2,1)}
-summary.arow{cursor:pointer;list-style:none}
-summary.arow::-webkit-details-marker{display:none}
-summary.arow:hover,.aitem[open] > summary.arow{background-size:100% 100%}
-.arow .y{font-family:var(--f-mono);font-size:12px;color:var(--muted);font-variant-numeric:tabular-nums}
-.arow .tt{font-weight:600}
-.arow .tt small{display:block;font-weight:400;color:var(--muted);font-size:14px;margin-top:2px}
-.arow .tt small:empty{display:none}
-.arow .wh{font-size:13.5px;color:var(--muted);text-align:right}
-.pm{position:relative;width:14px;height:14px;align-self:center;justify-self:end}
-.aitem .pm::before,.aitem .pm::after{content:"";position:absolute;left:0;top:6px;width:14px;height:2px;background:var(--accent);transition:transform .3s}
-.aitem .pm::after{transform:rotate(90deg)}
-.aitem[open] .pm::after{transform:rotate(0)}
-.abody{padding:6px 12px 26px calc(110px + 28px);border-bottom:1px solid var(--line);background:var(--surface)}
-.aitem[open] .abody{animation:open .35s ease}
-@keyframes open{from{opacity:0;transform:translateY(-6px)}}
-.abody dl{margin:0;display:grid;grid-template-columns:auto minmax(0,1fr);gap:10px 18px;max-width:52em;font-size:15px;line-height:1.7}
-.abody dt{font-family:var(--f-mono);font-size:11px;color:var(--accent);letter-spacing:.08em;padding-top:5px}
-.abody dd{margin:0}
-.ast{margin:14px 0 0;font-family:var(--f-mono);font-size:12px;color:var(--muted)}
-@media (max-width:700px){.arow{grid-template-columns:1fr 22px;gap:2px 10px}.arow .y,.arow .tt,.arow .wh{grid-column:1}.arow .pm{grid-column:2;grid-row:1 / span 3}.arow .wh{text-align:left}.abody{padding:6px 12px 22px}}
-
-/* career */
-.career-pin{display:block}
-.ruler{position:relative;margin-top:8px;padding-top:26px}
-.ruler .yrs{position:relative;height:20px;font-family:var(--f-mono);font-size:11px;color:var(--muted)}
-.ruler .yrs span{position:absolute;top:0;transform:translateX(-50%)}
-.ruler .yrs span::after{content:"";position:absolute;left:50%;top:20px;width:1px;height:150px;background:var(--line);opacity:.6}
-.lanes{position:relative;display:grid;gap:10px;margin-top:24px;margin-bottom:22px}
-.lanerow{position:relative;height:34px}
-.seg{position:absolute;top:0;height:100%;border-radius:6px;display:flex;align-items:center;padding-inline:10px;font-size:12.5px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;transition:opacity .35s, background .35s}
-.seg.co{background:var(--ink);color:var(--bg)}
-.seg.pj{background:var(--surface);border:1px solid var(--line);color:var(--ink);font-weight:500}
-.lanes.dim .seg:not(.on){opacity:.32}
-/* 너무 짧은 막대는 이름을 막대 아래에 */
-.seg.out{overflow:visible;padding:0}
-.seg.out::after{content:attr(data-l);position:absolute;right:0;top:calc(100% + 4px);font-family:var(--f-mono);font-size:10.5px;font-weight:500;color:var(--muted);white-space:nowrap}
-.mark{position:absolute;top:-6px;bottom:-6px;width:2px;background:var(--accent)}
-.mark::after{content:"PL";position:absolute;top:-16px;left:50%;transform:translateX(-50%);font-family:var(--f-mono);font-size:10px;color:var(--accent)}
-.playhead{position:absolute;top:0;bottom:-8px;width:2px;background:var(--accent);left:0;z-index:2;pointer-events:none}
-.playhead span{position:absolute;top:-21px;left:6px;padding:1px 6px;border-radius:4px;background:var(--bg);font-family:var(--f-mono);font-size:11px;color:var(--accent);white-space:nowrap;font-variant-numeric:tabular-nums}
-.cos{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(16px,2.6vw,36px);margin-top:44px}
-.co-item{border-top:2px solid var(--line);padding-top:18px;transition:border-color .35s, opacity .35s}
-.cos.dim .co-item:not(.on){opacity:.42}
-.co-item.on{border-color:var(--accent)}
-.co-item .when{font-family:var(--f-mono);font-size:12px;color:var(--muted);margin:0}
-.co-item h3{margin:6px 0 2px;font-size:20px}
-.co-item .role{margin:0 0 10px;color:var(--accent);font-size:14px;font-weight:600}
-.co-item p{margin:0;font-size:15px}
-.edu{display:flex;flex-wrap:wrap;gap:8px 28px;margin-top:44px;padding-top:18px;border-top:1px solid var(--line);font-size:14px;color:var(--muted)}
-.edu b{color:var(--ink);font-weight:600}
-@media (max-width:860px){.cos{grid-template-columns:1fr}.lanerow .seg{font-size:11px;padding-inline:6px}}
-
-/* stack */
-.chip{display:inline-flex;align-items:center;white-space:nowrap;border-radius:999px;border:1.5px solid var(--ink);background:var(--raise);color:var(--ink);font-weight:600}
-.chip.pri{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
-.chip.lt{border-color:var(--line);font-weight:500;color:var(--muted)}
-.stk{border-top:1px solid var(--ink)}
-.stk-row{display:grid;grid-template-columns:180px minmax(0,1fr);gap:16px;padding-block:18px;border-bottom:1px solid var(--line);align-items:center}
-.stk-row h3{margin:0;font-family:var(--f-mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:600}
-.stk-row > div{display:flex;flex-wrap:wrap;gap:8px}
-.stk .chip{cursor:default;font-size:14px;padding:7px 14px}
-.stk .chip.pri{font-size:15px;padding:8px 16px}
-@media (max-width:700px){.stk-row{grid-template-columns:1fr;gap:10px}}
-
-/* contact */
-.contact{padding-block:clamp(90px,14vh,160px) 48px;border-top:1px solid var(--line)}
-.big-mail{font-family:var(--f-display);font-variation-settings:"wdth" 100,"wght" 600;font-size:clamp(28px,5.4vw,72px);line-height:1;margin:22px 0 0;word-break:break-all;user-select:all}
-.contact-row{display:flex;flex-wrap:wrap;gap:12px;margin-top:32px;align-items:center}
-.copied{font-family:var(--f-mono);font-size:12px;color:var(--run);min-width:6em}
-.foot{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-top:clamp(70px,10vh,120px);font-family:var(--f-mono);font-size:11.5px;color:var(--muted)}
-
-/* polish: 여백 · 라운딩 · 모바일 밀도 */
-.sec{padding-block:clamp(72px,9vh,112px)}
-.sec-head{margin-bottom:clamp(28px,4.5vh,48px)}
-.card,.pillar,.term,.stage-box{border-radius:10px}
-.card{grid-template-columns:minmax(0,5.6fr) minmax(0,6.4fr);gap:clamp(24px,3.4vw,44px);padding:clamp(22px,2.4vw,30px)}
-.c-head{gap:14px} .c-body{gap:14px}
-.pillar{padding:20px}
-.mf{padding:12px;gap:12px;border-radius:8px}
-.mf-row li{font-size:12px;line-height:1.3;padding-top:20px}
-.stk .chip,.stk .chip.pri{font-size:14px;padding:7px 14px}
-.stk-row{grid-template-columns:160px minmax(0,1fr);padding-block:16px}
-@media (max-width:860px){
-  .card{grid-template-columns:minmax(0,1fr)}
-  .row{gap:10px;padding-block:24px}
-  .bar{height:32px}
-  .val{font-size:32px;margin-top:-2px}
-  .val small{display:inline;margin-right:8px;font-size:11px}
-  .impact-note{font-size:11.5px;line-height:1.6}
-}
-@media (max-width:700px){
-  .stk-row{grid-template-columns:1fr;gap:8px;padding-block:15px}
-  .stk-row > div{gap:7px}
+/* ---------- 반응형 ---------- */
+@media (max-width:760px){
+  .page{padding:52px 16px}
+  .case-head{grid-template-columns:1fr;align-items:start}
+  .metric{text-align:left}
+  .two{grid-template-columns:1fr;gap:8px}
+  .bridge{transform:rotate(90deg);height:20px}
+  .more{grid-template-columns:1fr}
+  .h2 br{display:none}
 }
 @media (max-width:640px){
-  .hero{padding-block:72px 28px}
-  .hero-top{gap:8px}
-  .hero-grid{margin-top:20px;gap:22px}
-  .lede{font-size:16px;line-height:1.65;margin-top:14px}
-  .cta{margin-top:22px}
-  .sec{padding-block:72px}
-  .sec-head{margin-bottom:30px}
-  .card h3{font-size:21px;line-height:1.35}
-  .card .res{font-size:32px;line-height:1.12}
-  .card{gap:14px;padding:22px 18px}
-  .prob{font-size:14.5px!important;line-height:1.6!important}
-  .mf-row li{font-size:11.5px}
-  .mf{padding:10px}
+  .bar,.bar.s1,.bar.s2{grid-template-columns:1fr auto;gap:4px 10px}
+  .bar .track{grid-column:1 / -1;grid-row:2}
+  .bar .val{grid-row:1;grid-column:2}
+  .facts{grid-template-columns:4.6rem 1fr}
+  .co{grid-template-columns:1fr}
+  .pjar{grid-template-columns:1fr}
+  .pjar dt{border-bottom:0;padding-bottom:0}
+  .pjar dd{padding-top:2px}
+  .flow{flex-direction:column;align-items:stretch}
+  .flow .tag-l{width:auto;margin-bottom:4px}
+  .flow .ar{flex:0 0 14px;width:1px;height:14px;align-self:center}
+  .flow .ar::after{right:auto;left:-3px;top:auto;bottom:-1px;border:3.5px solid transparent;border-top:5px solid var(--muted);border-bottom:0}
+  .flow + .flow{margin-top:16px}
+  .fig-d{display:none}
+  .fig-m{display:block}
+  .idx td.r{white-space:normal}
+  .stack{grid-template-columns:1fr;gap:0 0}
+  .stack dd{margin-bottom:8px}
 }
 
-.step{min-height:min(46vh,520px)}
-@media (min-width:861px){.term{max-width:520px;justify-self:end;width:100%} #term{font-size:13px}}
-@media (max-width:900px){.step{min-height:auto}}
-@media (max-width:860px){.val{margin-top:2px;display:flex;align-items:baseline;gap:8px} .val small{margin:0}}
-@media (max-width:640px){.card .meta{gap:6px;line-height:1.45} .card .meta > span:first-child{row-gap:5px}}
-
-/* v5: 히어로 pitch · 사례 카드 · 축 색 */
-.hero-top{gap:18px}
-.pitch-h{font-size:clamp(34px,5.6vw,80px);line-height:1.18;letter-spacing:-.02em;font-weight:700;margin:0;max-width:15em;text-wrap:balance}
-
-.name{font-size:clamp(28px,3vw,40px)!important;letter-spacing:-.01em}
-.hero-grid{margin-top:clamp(28px,5vh,56px)}
-.lede{margin-top:12px}
-
-.card{--axis:var(--accent);position:relative;overflow:hidden;border-radius:12px;padding:clamp(24px,3vw,40px) clamp(24px,3vw,40px) clamp(24px,3vw,36px) clamp(28px,3.2vw,44px);gap:clamp(24px,4vw,56px);grid-template-columns:minmax(0,5fr) minmax(0,7fr);box-shadow:0 1px 0 color-mix(in srgb,var(--ink) 4%,transparent),0 8px 24px -16px color-mix(in srgb,var(--ink) 25%,transparent)}
-.card[data-p^="협업"]{--axis:var(--run)} .card[data-p^="자동화"]{--axis:var(--auto)}
-.card::before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--axis)}
-.card:hover{border-color:color-mix(in srgb,var(--axis) 50%,var(--line))}
-.c-head{gap:10px}
-@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .card{border-color:color-mix(in srgb,var(--ink) 9%,transparent);box-shadow:0 10px 28px -12px rgba(0,0,0,.5)}}
-:root[data-theme="dark"] .card{border-color:color-mix(in srgb,var(--ink) 9%,transparent);box-shadow:0 10px 28px -12px rgba(0,0,0,.5)}
-.c-top{display:flex;align-items:center;gap:14px}
-.c-no{font-family:var(--f-display);font-variation-settings:"wdth" 75,"wght" 700;font-size:40px;line-height:.9;color:color-mix(in srgb,var(--muted) 45%,transparent);font-variant-numeric:tabular-nums}
-.c-tags{display:flex;flex-wrap:wrap;gap:6px 12px}
-.c-tags i{font-style:normal;display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:700}
-.c-tags i::before{content:"";width:8px;height:8px;border-radius:50%;background:currentColor}
-.c-tags .t-c{color:var(--run)} .c-tags .t-r{color:var(--accent)} .c-tags .t-a{color:var(--auto)}
-.c-src{margin:0;font-family:var(--f-mono);font-size:12px;color:var(--muted);letter-spacing:.02em}
-.card h3{font-size:clamp(20px,1.9vw,25px);line-height:1.38;margin-top:6px}
-.card .res{margin-top:6px;font-size:clamp(28px,3vw,40px)}
-.trio{list-style:none;margin:0;padding:0;display:grid}
-.trio li{display:grid;grid-template-columns:44px minmax(0,1fr);gap:14px;padding:14px 0;border-top:1px solid var(--line);font-size:15px;line-height:1.65}
-.trio li:first-child{border-top:0;padding-top:2px}
-.trio b{font-size:12.5px;font-weight:700;padding-top:2px;color:var(--muted)}
-.trio .q-p b{color:var(--stop)}
-.trio .q-r b{color:var(--axis)}
-.trio .q-r span{font-weight:600}
-.card .more{border-top:1px solid var(--line)}
-.card .more summary{padding-top:14px;color:var(--axis);font-family:var(--f-body);font-size:13.5px;font-weight:600;letter-spacing:0}
-.card .more[open] summary span::after{font-size:13.5px}
-.card .res{color:var(--axis)}
-.card .more .pm::before,.card .more .pm::after{background:var(--axis)}
-.card .mf,.pillar .mf{background:transparent;padding:6px 0 0;border-radius:0}
-.card .mf{padding:8px 0}
-.card .team{background:transparent;padding:0}
-.card .sk2{color:var(--axis)}
-.card .mf-row li.good{color:var(--axis)}
-.card .mf-row li.good::before{background:var(--axis);border-color:var(--axis);box-shadow:0 0 0 4px color-mix(in srgb,var(--axis) 22%,transparent)}
-.card .tm-d i{border-color:var(--axis)} .card .tm-d i.me{background:var(--axis)}
-.card .chips li::before{background:var(--axis)}
-.card .spans{padding:14px 0 2px;border-top:1px solid var(--line)}
-@media (max-width:860px){
-  .card{grid-template-columns:minmax(0,1fr);gap:18px}
-  .c-no{font-size:32px}
-  .trio li{grid-template-columns:38px minmax(0,1fr);gap:10px;font-size:14.5px}
+/* ---------- 인쇄 = A4 PDF ---------- */
+@page{size:A4;margin:0}
+@media print{
+  :root,:root:not([data-theme="light"]),:root[data-theme="dark"]{
+    --bg:#FFFFFF; --paper:#FFFFFF; --raise:#F7F8F5; --ink:#131719; --muted:#58626A; --faint:#7E878E; --line:#D3D8D2; --line-soft:#E6E9E4;
+    --accent:#C25700; --accent-soft:#FBEFE4; --run:#1B8A4B; --run-soft:#E6F4EC; --stop:#C5362A; --stop-soft:#FBEAE8; --auto:#2F5FD0; --auto-soft:#E9EFFC; color-scheme:light;
+  }
+  html{font-size:12.5px}
+  body{background:#fff;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .web-only,.nav{display:none !important}
+  .page{max-width:none;width:210mm;height:297mm;margin:0;padding:15mm 15mm 0;border:0;overflow:hidden;display:flex;flex-direction:column;break-after:page;page-break-after:always}
+  .page:last-of-type{break-after:auto;page-break-after:auto}
+  .page-body{flex:1;min-height:0}
+  .cover .page-body{padding-bottom:10mm;gap:0}
+  .foot{height:12mm;display:flex;align-items:center;justify-content:space-between;border-top:1px solid var(--line-soft);font-family:var(--f-mono);font-size:9.5px;color:var(--faint);letter-spacing:.06em;flex:none}
+  .foot b{color:var(--accent);font-weight:600}
+  .pitch{margin-top:64px}
+  .name{font-size:76px}
+  .facts{margin-top:40px}
+  .impact{margin-top:44px}
+  .sub{margin-top:16px}
 }
-
-/* pillars: 축 색 상단 띠 */
-.pillar{position:relative;overflow:hidden;border-top:4px solid var(--axis,var(--accent))}
-.pillar:nth-child(1){--axis:var(--run)} .pillar:nth-child(2){--axis:var(--accent)} .pillar:nth-child(3){--axis:var(--auto)}
-.pillar .chips li::before{background:var(--axis)}
-.pillar .pgo{color:var(--axis)}
-.pillar .mf-row li.good{color:var(--axis)}
-.pillar .mf-row li.good::before{background:var(--axis);border-color:var(--axis);box-shadow:0 0 0 4px color-mix(in srgb,var(--axis) 22%,transparent)}
-.pillar .ladder{background:transparent;padding:0;border-bottom:1px solid var(--line);border-radius:0}
-
-@media (prefers-reduced-motion: reduce){
-  .lamp,.retry,#term .caret{animation:none}
-  *{transition:none!important}
-}
-
-/* v6: 경력 중심 */
-.hero .eyebrow{align-items:flex-start;line-height:1.6}
-.hero .eyebrow .lamp{margin-top:.55em}
-.facts{margin:0;display:grid;gap:0;border-top:1px solid var(--ink);min-width:0}
-.facts > div{display:grid;grid-template-columns:72px minmax(0,1fr);gap:14px;padding:12px 0;border-bottom:1px solid var(--line)}
-.facts dt{font-family:var(--f-mono);font-size:11.5px;letter-spacing:.08em;color:var(--muted);padding-top:3px}
-.facts dd{margin:0;font-size:15px;line-height:1.55}
-@media (min-width:861px){.facts{max-width:520px;justify-self:end;width:100%}}
-.sum{border-top:1px solid var(--ink)}
-.sum-row{display:grid;grid-template-columns:180px minmax(0,1fr);gap:16px;padding-block:18px;border-bottom:1px solid var(--line);align-items:baseline}
-.sum-row h3{margin:0;font-size:14px;font-weight:700;color:var(--accent)}
-.sum-row p{margin:0;font-size:15.5px;line-height:1.7}
-.sum-row b{font-weight:700}
-@media (max-width:700px){.sum-row{grid-template-columns:1fr;gap:4px;padding-block:15px}}
-.cos2{display:grid;gap:clamp(56px,9vh,96px)}
-.co{display:grid;gap:22px;min-width:0}
-.co-head{display:grid;grid-template-columns:minmax(0,4fr) minmax(0,8fr);gap:clamp(20px,4vw,56px);border-top:2px solid var(--ink);padding-top:22px}
-.co-id .when{font-family:var(--f-mono);font-size:12px;color:var(--muted);margin:0}
-.co-id h3{margin:6px 0 2px;font-size:clamp(24px,2.4vw,32px);line-height:1.2}
-.co-id .role{margin:0;color:var(--accent);font-size:15px;font-weight:600}
-.co-bul{list-style:none;margin:0;padding:0;display:grid;gap:10px}
-.co-bul li{position:relative;padding-left:16px;font-size:15.5px;line-height:1.65}
-.co-bul li::before{content:"";position:absolute;left:2px;top:.66em;width:6px;height:6px;border-radius:1px;background:var(--accent)}
-.co-bul b{font-weight:700}
-.co-proj{background:var(--surface);border-radius:10px;padding:16px 20px;display:grid;gap:4px}
-.co-pn{margin:0;font-weight:700;font-size:16px}
-.co-pi{margin:0;font-size:14.5px;color:var(--ink)}
-.co-proj .ast{margin:4px 0 0}
-.case-lead{display:grid;gap:8px;margin-top:10px}
-.lead-h{margin:0;font-size:clamp(22px,2.4vw,30px);line-height:1.3;letter-spacing:-.01em}
-.co .pipe-grid{margin-bottom:12px}
-.co .track{display:grid;grid-template-columns:minmax(0,1fr);gap:16px}
-.trio .q-n b{color:var(--muted)}
-.trio .q-n span{color:var(--muted);font-size:14px}
-@media (max-width:860px){.co-head{grid-template-columns:1fr;gap:14px}}
 </style>
 </head>
 <body>
 
-<div class="progress" aria-hidden="true"><span></span></div>
-
-<header class="nav">
-  <div class="wrap">
+<header class="nav web-only">
+  <div class="nav-in">
     <a class="brand" href="#top">이강일<span>/backend</span></a>
     <nav aria-label="섹션">
-      <a href="#summary">요약</a><a href="#impact">성과</a><a href="#career" class="keep">경력</a><a href="#archive">그 밖에</a><a href="#stack">스택</a><a href="#contact" class="keep">연락</a>
+      <a class="opt" href="#career">경력</a>
+      <a href="#cases">사례</a>
+      <a class="opt" href="#more">그 밖에</a>
+      <a href="#contact">연락</a>
+      <a class="pdf" href="portfolio.pdf" download>PDF ↓</a>
     </nav>
   </div>
 </header>
 
-<main>
-<section class="hero" id="top">
-  <canvas id="stream" aria-hidden="true"></canvas>
-  <div class="wrap">
-    <div class="hero-top">
-      <p class="eyebrow"><i class="lamp"></i>8년차 백엔드 개발자 · 백엔드 개발 리드 · Java/Spring · Kafka 데이터 파이프라인 · 투자·결제 도메인</p>
-      <h1 class="pitch-h" id="pitch">협업과 책임감, 자동화를 통해 좋은 제품을 만들어가는 백엔드 개발자</h1>
+<main id="top">
+
+<!-- ============ 1. 표지 ============ -->
+<section class="page cover">
+  <div class="page-body">
+    <div>
+      <p class="eyebrow"><span class="lamp"></span>Backend Portfolio · 2026.10</p>
+      <!-- pitch = 사용자 소신. 변경 금지 -->
+      <p class="pitch">협업과 책임감, 자동화를 통해 좋은 제품을 만들어가는 백엔드 개발자</p>
+      <h1 class="name">이강일</h1>
+      <p class="role">8년차 백엔드 개발자 · 백엔드 개발 리드</p>
+      <p class="lede">미국 투자 플랫폼의 투자 · 결제 · 에스크로 도메인을 기획 단계부터 만들고 운영했고, 지금은 제조 현장 모니터링 솔루션에서 설비 데이터 입수부터 Kafka 처리, 저장 · 집계 API까지 맡고 있습니다.</p>
+
+      <dl class="facts">
+        <dt>현재</dt><dd>디라이트 파트너 · 백엔드 개발 리드 <small>2025.03 ~ 현재</small></dd>
+        <dt>이전</dt><dd>일루미나리안 · 팀원 → 프로젝트 리드 <small>2019.12 ~ 2025.02</small> &nbsp;/&nbsp; 임플릿 · 팀원 <small>2017.10 ~ 2019.11</small></dd>
+        <dt>도메인</dt><dd>투자 · 결제 · 에스크로 / 제조 설비 데이터</dd>
+        <dt>주력</dt><dd>Java · Spring Boot · MySQL · JPA · Kafka · AWS · Docker</dd>
+      </dl>
+
+      <div class="impact">
+        <p class="kick">Impact · 운영 환경에서 잰 전후 숫자</p>
+        <div class="bars">
+          <div class="bar"><p class="lbl">서버 기동 시간<small>QGX</small></p><div class="track"><i style="width:3.9%"></i></div><p class="val">3분 → <b>7초</b></p></div>
+          <div class="bar"><p class="lbl">AI 리포트 1건 생성<small>QGX</small></p><div class="track"><i style="width:8.3%"></i></div><p class="val">2분 → <b>10초</b></p></div>
+          <div class="bar"><p class="lbl">회원가입 API 평균<small>EnergySharesUS</small></p><div class="track"><i style="width:25%"></i></div><p class="val">4초 → <b>1초</b></p></div>
+          <div class="bar"><p class="lbl">배포 1회<small>EnergySharesUS</small></p><div class="track"><i style="width:33.3%"></i></div><p class="val">12분 → <b>4분</b></p></div>
+        </div>
+        <p class="note">막대 길이 = 수정 후 ÷ 수정 전. 항목마다 수정 전 값을 100%로 둔 비율입니다.</p>
+      </div>
     </div>
-    <div class="hero-grid">
-      <div>
-        <p class="name" id="name" aria-label="이강일">이강일</p>
-        <p class="lede">미국 투자 플랫폼의 투자 · 결제 · 에스크로 도메인을 기획 단계부터 만들고 운영했고, 지금은 제조 현장 모니터링 솔루션에서 설비 데이터 입수부터 Kafka 처리, 저장 · 집계 API까지 맡고 있습니다.</p>
-        <div class="cta">
-          <a class="btn mag" href="#career">경력 보기 <span class="arr">→</span></a>
-          <a class="btn ghost mag" href="#contact">연락하기</a>
+
+    <p class="contact"><span class="apply-only">TEL</span><span class="apply-only" style="color:var(--ink)">010-2464-2392</span><span>MAIL</span><a href="mailto:vcxz2464@gmail.com">vcxz2464@gmail.com</a><span>WEB</span><a href="https://vcxz2392.github.io">vcxz2392.github.io</a></p>
+  </div>
+  <footer class="foot"><span>이강일 · BACKEND PORTFOLIO</span><span><b>01</b> / 09</span></footer>
+</section>
+
+<!-- ============ 2. 경력 · 목차 ============ -->
+<section class="page" id="career">
+  <div class="page-body">
+    <p class="eyebrow">Career · 2017.10 ~ 현재</p>
+    <h2 class="h2">경력 한눈에 보기</h2>
+
+    <div style="margin-top:14px">
+      <div class="co">
+        <p class="when">2025.03 ~ 현재</p>
+        <div>
+          <h3>디라이트 파트너 <small>백엔드 개발 리드</small></h3>
+          <p class="prod">QGX: 고객사 공장에 서버를 설치하는 제조 현장 모니터링 솔루션 (온프레미스)</p>
+          <ul>
+            <li>설비 TCP 입수 → Kafka 메시지 처리 → 저장 · 집계 API 구간 백엔드 리드, 레거시 단일 프로세스를 입수 · 처리 서비스로 분리</li>
+            <li>고객사 기간계(AS400 · MSSQL) read-only 일 배치 연동, AI 리포트용 조회 REST API Tool 설계 · 구현</li>
+            <li>SaaS 전환 정부지원사업 기술 리딩, TTA · KACI 클라우드 서비스 시험 통과</li>
+            <li>형상관리 도구를 쓰지 않던 팀에 브랜치 · PR · 리뷰 흐름과 Docker 이미지 배포 도입, 사내 헬프데스크 단독 구축</li>
+          </ul>
         </div>
       </div>
-      <dl class="facts">
-        <div><dt>현재</dt><dd>디라이트 파트너 · 백엔드 개발 리드</dd></div>
-        <div><dt>이전</dt><dd>일루미나리안 · 팀원 → 프로젝트 리드<br>임플릿 · 팀원</dd></div>
-        <div><dt>도메인</dt><dd>투자 · 결제 · 에스크로 / 제조 설비 데이터</dd></div>
-        <div><dt>주력</dt><dd>Java · Spring Boot · MySQL · JPA · Kafka · AWS</dd></div>
+      <div class="co">
+        <p class="when">2019.12 ~ 2025.02</p>
+        <div>
+          <h3>일루미나리안 <small>팀원 → 프로젝트 리드 (2024.03~)</small></h3>
+          <p class="prod">EnergySharesUS: 미국 신재생 에너지 크라우드 펀딩 플랫폼 · EnergySharesJP: 일본판</p>
+          <ul>
+            <li>기획 단계부터 합류해 회원 · 인증 · 투자 · 결제 · 정산 도메인 백엔드 설계 · 구축과 운영</li>
+            <li>2024.03부터 13명 팀 프로젝트 리드, 백엔드 2명 리드. 리뷰 규칙 제안과 검증 · 배포 단계 분리</li>
+            <li>EnergySharesJP: 회원 · 투자 처리 · 정산 API (Go · Echo)</li>
+          </ul>
+        </div>
+      </div>
+      <div class="co">
+        <p class="when">2017.10 ~ 2019.11</p>
+        <div>
+          <h3>임플릿 <small>팀원</small></h3>
+          <p class="prod">케이블 방송사 SI</p>
+          <ul>
+            <li>콘텐츠 편성 · 배포 운영자 시스템 백엔드와 관리 UI 개발, 셋톱 수집 · 진단 이력 조회 API</li>
+          </ul>
+        </div>
+      </div>
+      <p class="edu"><span>컴퓨터공학 학사 (학점은행제) · 2016</span><span>수원과학대학교 컴퓨터정보계열 · 2011 ~ 2016</span><span>정보처리기사 · 2016.11</span></p>
+    </div>
+
+    <div style="margin-top:24px" id="cases">
+      <p class="kick">Cases · 대표 사례</p>
+      <table class="idx">
+        <thead><tr><th>No</th><th>사례</th><th>핵심 결과</th><th style="text-align:right">쪽</th></tr></thead>
+        <tbody>
+          <tr><td>01</td><td><a href="#case-01">한 프로세스에 묶인 입수와 처리를 나눠 실패해도 원본이 남게</a><span class="co-name">디라이트 파트너 · QGX</span></td><td class="r">실패 건만 재처리</td><td class="p">03</td></tr>
+          <tr><td>02</td><td><a href="#case-02">미국 증권 규정을 투자 상태와 검증 규칙으로</a><span class="co-name">일루미나리안 · EnergySharesUS</span></td><td class="r">검증 규칙 12개<br>카드 투자 오픈</td><td class="p">04</td></tr>
+          <tr><td>03</td><td><a href="#case-03">외부 장애는 사용자에게 번지지 않게, 에러는 쌓이기 전에</a><span class="co-name">일루미나리안 · EnergySharesUS</span></td><td class="r">4초 → 1초<br>ERROR 로그 알람</td><td class="p">05</td></tr>
+          <tr><td>04</td><td><a href="#case-04">AI 리포트 조회를 SQL 생성에서 API Tool 호출로</a><span class="co-name">디라이트 파트너 · QGX</span></td><td class="r">2분 → 10초</td><td class="p">06</td></tr>
+          <tr><td>05</td><td><a href="#case-05">리뷰 · 배포 흐름을 만들고, 다음 회사로 가져가기</a><span class="co-name">일루미나리안 → 디라이트 파트너</span></td><td class="r">배포 12분 → 4분<br>업체 배포 코드 통일</td><td class="p">07</td></tr>
+          <tr><td>+</td><td><a href="#more">그 밖에 한 일 · 기술 스택</a><span class="co-name">서버 기동 · 기간계 연동 · SaaS 외</span></td><td class="r"></td><td class="p">08</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <footer class="foot"><span>이강일 · BACKEND PORTFOLIO</span><span><b>02</b> / 09</span></footer>
+</section>
+
+<!-- ============ CASE 01 ============ -->
+<section class="page case" id="case-01">
+  <div class="page-body">
+    <div class="case-head">
+      <div>
+        <p><span class="case-no">CASE 01</span><span class="case-meta">디라이트 파트너 · QGX · 2025.10 ~</span></p>
+        <h2 class="h2">한 프로세스에 묶여 있던 입수와 처리를 나눠, <br>후처리가 실패해도 원본이 남는 구조로</h2>
+      </div>
+      <div class="metric"><b>원본 보관</b><span>실패 건만 재처리</span></div>
+    </div>
+    <p class="lede">설비가 TCP로 보낸 값을 같은 프로세스에서 바로 후처리하던 레거시를 입수 · 처리 · 웹으로 나누고, 메시지마다 어디까지 처리됐는지 남겼습니다.</p>
+
+    <figure class="fig">
+      <svg class="fig-d" viewBox="0 0 700 236" role="img" aria-label="설비에서 입수 서비스, Kafka, 처리 서비스, MySQL로 흐르고, 메시지 상태 기록과 원본 메시지 테이블, 재처리 API가 처리 서비스로 되돌아가는 구조">
+        <defs>
+          <marker id="ah" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto"><path class="s-mk" d="M0,0 L8,4 L0,8 z"/></marker>
+          <marker id="ahr" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto"><path class="s-mkacc" d="M0,0 L8,4 L0,8 z"/></marker>
+        </defs>
+        <g font-family="IBM Plex Sans KR, sans-serif" font-size="12" text-anchor="middle">
+          <rect class="s-box" x="1" y="24" width="92" height="58" rx="8"/>
+          <text class="s-t" x="47" y="50" font-weight="600">설비</text><text class="s-m" x="47" y="67" font-size="10">A · B · C</text>
+          <rect class="s-strong" x="122" y="24" width="132" height="58" rx="8"/>
+          <text class="s-t" x="188" y="48" font-weight="600">입수 서비스</text><text class="s-m" x="188" y="66" font-size="10" font-family="JetBrains Mono, monospace">Netty → Producer</text>
+          <rect class="s-key" x="282" y="24" width="92" height="58" rx="8"/>
+          <text class="s-t" x="328" y="50" font-weight="600">Kafka</text><text class="s-m" x="328" y="67" font-size="10">메시지 영속</text>
+          <rect class="s-strong" x="402" y="24" width="150" height="58" rx="8"/>
+          <text class="s-t" x="477" y="48" font-weight="600">처리 서비스</text><text class="s-m" x="477" y="66" font-size="10" font-family="JetBrains Mono, monospace">Consumer · 수동 ACK · JPA</text>
+          <rect class="s-box" x="580" y="24" width="118" height="58" rx="8"/>
+          <text class="s-t" x="639" y="50" font-weight="600">MySQL</text><text class="s-m" x="639" y="67" font-size="10">저장 · 집계</text>
+          <line class="s-ln" x1="93" y1="53" x2="120" y2="53" marker-end="url(#ah)"/>
+          <text class="s-m" x="107" y="44" font-size="9" font-family="JetBrains Mono, monospace">TCP</text>
+          <line class="s-ln" x1="254" y1="53" x2="280" y2="53" marker-end="url(#ah)"/>
+          <line class="s-ln" x1="374" y1="53" x2="400" y2="53" marker-end="url(#ah)"/>
+          <line class="s-ln" x1="552" y1="53" x2="578" y2="53" marker-end="url(#ah)"/>
+          <rect class="s-ok" x="402" y="160" width="150" height="62" rx="8"/>
+          <text class="s-t" x="477" y="183" font-weight="600">메시지 상태 기록</text>
+          <text class="s-t" x="477" y="200" font-size="9" font-family="JetBrains Mono, monospace">CONSUMING → PROCESSING</text>
+          <text class="s-t" x="477" y="213" font-size="9" font-family="JetBrains Mono, monospace">→ SUCCESS / FAILED</text>
+          <rect class="s-strong" x="200" y="160" width="160" height="62" rx="8"/>
+          <text class="s-t" x="280" y="183" font-weight="600">원본 메시지 테이블</text>
+          <text class="s-m" x="280" y="200" font-size="9" font-family="JetBrains Mono, monospace">원본 JSON · requestId</text>
+          <text class="s-m" x="280" y="213" font-size="9" font-family="JetBrains Mono, monospace">topic · partition · offset</text>
+          <rect class="s-key" x="1" y="160" width="170" height="62" rx="8"/>
+          <text class="s-t" x="86" y="186" font-weight="600">재처리 API</text>
+          <text class="s-m" x="86" y="204" font-size="10">단건 · 배치 · 이벤트 유형별</text>
+          <rect class="s-box" x="580" y="160" width="118" height="62" rx="8"/>
+          <text class="s-t" x="639" y="186" font-weight="600">웹 서비스</text><text class="s-m" x="639" y="204" font-size="10">조회 · 집계 API</text>
+          <line class="s-ln" x1="452" y1="82" x2="452" y2="158" marker-end="url(#ah)"/>
+          <text class="s-m" x="458" y="146" font-size="9" text-anchor="start">처리 단계마다</text>
+          <line class="s-ln" x1="402" y1="191" x2="362" y2="191" marker-end="url(#ah)"/>
+          <text class="s-ng" x="381" y="184" font-size="9" font-family="JetBrains Mono, monospace">FAILED</text>
+          <line class="s-ln" x1="200" y1="191" x2="173" y2="191" marker-end="url(#ah)"/>
+          <path class="s-lnacc" d="M86,160 L86,118 L520,118 L520,84" stroke-dasharray="4 3" marker-end="url(#ahr)"/>
+          <text class="s-acc" x="210" y="112" font-size="9.5" text-anchor="start">원본 기준으로 실패 건만 다시 처리</text>
+          <line class="s-ln" x1="639" y1="82" x2="639" y2="158" stroke-dasharray="3 3" marker-end="url(#ah)"/>
+          <text class="s-m" x="646" y="124" font-size="9" text-anchor="start">읽기</text>
+        </g>
+      </svg>
+      <div class="fig-m" aria-hidden="true">
+        <div class="flow">
+          <div class="nd">설비 A · B · C</div><div class="ar"></div>
+          <div class="nd">입수 서비스<small>Netty → Producer</small></div><div class="ar"></div>
+          <div class="nd key">Kafka<small>메시지 영속</small></div><div class="ar"></div>
+          <div class="nd">처리 서비스<small>Consumer · 수동 ACK · JPA</small></div><div class="ar"></div>
+          <div class="nd">MySQL → 웹 서비스<small>저장 · 집계 → 조회 API</small></div>
+        </div>
+        <div class="flow">
+          <span class="tag-l">실패하면</span>
+          <div class="nd ok">메시지 상태 기록<small>CONSUMING → PROCESSING → SUCCESS / FAILED</small></div><div class="ar"></div>
+          <div class="nd">원본 메시지 테이블<small>원본 JSON · requestId · offset</small></div><div class="ar"></div>
+          <div class="nd key">재처리 API<small>원본 기준으로 실패 건만 다시 처리</small></div>
+        </div>
+      </div>
+      <figcaption>traceId · requestId를 Kafka 헤더와 MDC로 넘겨 입수 로그와 처리 로그를 같은 ID로 연결</figcaption>
+    </figure>
+
+    <dl class="pjar">
+      <dt>문제</dt>
+      <dd>입수 · 처리 · 웹이 한 프로세스에 묶여 장애 격리와 독립 배포가 불가. TCP로 받은 데이터를 같은 프로세스에서 동기로 후처리해, 후처리가 실패하면 원본 기준으로 추적 · 재처리할 경로가 없어 데이터 유실로 이어지는 구조</dd>
+      <dt>판단</dt>
+      <dd>
+        <ul>
+          <li>도메인 경계를 지금 긋기엔 이르다고 보고 1차 분리 기준을 기술적 책임(입수 · 처리 · 웹)으로 설정. 독립 배포와 오너십이 필요해질 때마다 하나씩 떼어내는 순서</li>
+          <li>재처리에는 메시지 영속과 원본 보관이 필요해 in-memory queue 대신 Kafka 채택</li>
+        </ul>
+      </dd>
+      <dt>조치</dt>
+      <dd>
+        <ul>
+          <li>입수(Netty → Kafka Producer) · 처리(Kafka Consumer → JPA) · 웹으로 분리</li>
+          <li>처리 완료 후 offset을 커밋하도록 수동 ACK 적용, 메시지 상태 기록, 원본 메시지 테이블에 원본 JSON · requestId · offset 보관</li>
+          <li>실패 메시지는 단건 · 배치 · 이벤트 유형별 재처리 API로 다시 처리</li>
+        </ul>
+      </dd>
+      <dt class="res">결과</dt>
+      <dd class="res">입수 · 처리 분리를 운영에 적용. Kafka에 적재된 메시지는 후처리가 실패해도 원본이 남아, requestId · offset 기준으로 원인을 확인하고 실패 건만 다시 처리</dd>
+    </dl>
+
+    <div class="take">
+      <p class="kick">이 사례에서 가져가는 것</p>
+      <p>데이터를 다루는 시스템에서는 얼마나 빨리 처리하는지보다 <b>실패했을 때 무엇이 남는지</b>를 먼저 정합니다. 원본과 처리 상태가 남아 있으면 원인 확인과 재처리가 정해진 운영 절차가 됩니다.</p>
+    </div>
+  </div>
+  <footer class="foot"><span>이강일 · BACKEND PORTFOLIO</span><span><b>03</b> / 09</span></footer>
+</section>
+
+<!-- ============ CASE 02 ============ -->
+<section class="page case" id="case-02">
+  <div class="page-body">
+    <div class="case-head">
+      <div>
+        <p><span class="case-no">CASE 02</span><span class="case-meta">일루미나리안 · EnergySharesUS · 2021.12 ~ 2024</span></p>
+        <h2 class="h2">미국 증권 규정을 <br>투자 상태와 검증 규칙으로</h2>
+      </div>
+      <div class="metric"><b>검증 규칙 12개</b><span>신용카드 투자 오픈 2023 4Q</span></div>
+    </div>
+    <p class="lede">투자 한도, 취소 기한, 조건 변경 재동의 같은 규정 요구사항을 사람이 기억하는 대신, 투자와 취소 때마다 코드가 같은 규칙으로 검증하게 만들었습니다.</p>
+
+    <figure class="fig">
+      <div class="flow">
+        <span class="tag-l">흐름</span>
+        <div class="nd">투자 요청</div><div class="ar"></div>
+        <div class="nd key">검증 규칙 12개<small>한도 · 기한 · 수정 제한</small></div><div class="ar"></div>
+        <div class="nd">비관적 락<small>마감 직후 몰리는 구간</small></div><div class="ar"></div>
+        <div class="nd">에스크로 거래<small>North Capital</small></div><div class="ar"></div>
+        <div class="nd ok">웹훅 동기화<small>4종 수신</small></div>
+      </div>
+      <div class="flow">
+        <span class="tag-l">상태</span>
+        <div class="nd">CREATED</div><div class="ar"></div>
+        <div class="nd">FUNDED</div><div class="ar"></div>
+        <div class="nd ok">SETTLED</div><div class="ar"></div>
+        <div class="nd hot">UNWIND<small>환불</small></div>
+      </div>
+      <figcaption>투자 상태를 에스크로 거래 상태와 1:1로 매핑, 조건 변경 재동의는 상태가 아닌 플래그로 분리</figcaption>
+    </figure>
+
+    <dl class="pjar">
+      <dt>문제</dt><dd>기획 · 컴플라이언스가 정리한 미국 증권 규정(Reg CF · Reg D · Reg A) 요구사항이 투자 한도 · 취소 기한 · 조건 변경 재동의를 요구하고, 에스크로 · KYC/AML · 문서 보관은 제약이 서로 다른 외부 서비스에 의존</dd>
+      <dt>판단</dt>
+      <dd>
+        <ul>
+          <li>투자 상태가 에스크로 거래 상태와 1:1로 맞물리는 구조라 상태를 늘리지 않고, 재동의는 플래그로 분리</li>
+          <li>웹훅 부재 · 호출 제한 · 검증 실패 같은 외부 제약은 우리 쪽 상태와 배치로 흡수</li>
+          <li>마감 알림 직후 몰리는 요청은 당시 규모에서 분산 락보다 DB 트랜잭션 안의 비관적 락으로 충분하다고 판단</li>
+        </ul>
+      </dd>
+      <dt>조치</dt>
+      <dd>
+        <ul>
+          <li>투자 검증 규칙 12개: 결제수단별 한도(카드 $5,000 · ACH $100,000), Reg CF 한도를 투자 시 차감 · 취소 시 복원, 롤링 12개월 1회 수정 제한</li>
+          <li>에스크로를 FundAmerica에서 North Capital로 바꾸며 없는 웹훅은 sync로 대체, Egnyte 호출 제한은 서비스 계정 분산 배치, KYC/AML 실패 건은 결제 보류 후 수동 검토</li>
+          <li>신용카드 투자 결제를 North Capital + Stripe로 연동: 수수료 부담 주체 설정, 진행 중 투자가 있으면 카드 수정 잠금</li>
+        </ul>
+      </dd>
+      <dt class="res">결과</dt><dd class="res">규제 한도 · 결제 한도 · 취소 기한을 투자와 취소 때마다 같은 규칙으로 검증. 신용카드 투자 오픈(2023 4분기)</dd>
+    </dl>
+
+    <div class="take">
+      <p class="kick">이 사례에서 가져가는 것</p>
+      <p>규정이 많은 도메인일수록 상태는 적게 두고, 규칙은 <b>한곳에서 매번 같은 방식으로</b> 검증되게 합니다. 외부 서비스의 빈틈은 그쪽이 고쳐 주길 기다리지 않고 우리 쪽 상태와 배치로 메웁니다.</p>
+    </div>
+  </div>
+  <footer class="foot"><span>이강일 · BACKEND PORTFOLIO</span><span><b>04</b> / 09</span></footer>
+</section>
+
+<!-- ============ CASE 03 ============ -->
+<section class="page case" id="case-03">
+  <div class="page-body">
+    <div class="case-head">
+      <div>
+        <p><span class="case-no">CASE 03</span><span class="case-meta">일루미나리안 · EnergySharesUS · 2024</span></p>
+        <h2 class="h2">외부 장애는 사용자에게 번지지 않게, <br>에러는 쌓이기 전에 알게</h2>
+      </div>
+      <div class="metric"><b>4초 → 1초</b><span>회원가입 API 평균</span></div>
+    </div>
+    <p class="lede">미국 투자 플랫폼 운영 중 같은 해에 손본 두 가지입니다. 가입 요청이 외부 서비스에 끌려가지 않게 하고, 알람이 놓치던 에러를 잡았습니다.</p>
+
+    <div class="sub">
+      <div class="sub-h"><h3>회원가입 외부 연동 비동기 전환<small>2024.04</small></h3><p class="v">4초 → <b>1초</b></p></div>
+      <div class="fig" style="padding:12px">
+        <div class="flow">
+          <span class="tag-l">전</span>
+          <div class="nd">가입 API</div><div class="ar"></div>
+          <div class="nd hot">KYC</div><div class="ar"></div>
+          <div class="nd hot">이메일</div><div class="ar"></div>
+          <div class="nd hot">서드파티<small>동기 직렬 · 평균 4초</small></div>
+        </div>
+        <div class="flow">
+          <span class="tag-l">후</span>
+          <div class="nd ok">가입 API<small>DB 저장 + 발행 · 1초</small></div><div class="ar"></div>
+          <div class="nd key">SQS</div><div class="ar"></div>
+          <div class="nd">컨슈머<small>외부 연동 처리</small></div><div class="ar"></div>
+          <div class="nd">3회 재시도 → DLQ<small>Slack 실패 알림</small></div>
+        </div>
+      </div>
+      <dl class="pjar">
+        <dt>문제</dt><dd>외부 KYC · 이메일 · 서드파티 호출이 동기로 이어져 평균 4초, 외부 지연 시 7초 이상. 외부 장애가 곧 회원가입 실패로 노출</dd>
+        <dt>판단</dt><dd>가입 시점에 즉시 필요한 건 접수 완료 여부 하나뿐. 브로커는 사내 메일 서비스가 이미 쓰던 SQS를 재사용</dd>
+        <dt>조치</dt><dd>가입 API는 DB 저장과 SQS 발행만, 외부 연동은 컨슈머로 분리. 최대 3회 재시도 후 DLQ로 이동, Slack 알림으로 실패 메시지 가시화</dd>
+        <dt class="res">결과</dt><dd class="res">회원가입 API 평균 4초 → 1초. 외부 KYC · 이메일 처리 완료를 기다리지 않고 가입 접수를 응답해, 외부 장애가 가입 실패로 드러나지 않음</dd>
       </dl>
     </div>
+
+    <div class="sub">
+      <div class="sub-h"><h3>운영 알람 재설계<small>2024.09</small></h3><p class="v"><b>ERROR 로그 기준</b></p></div>
+      <dl class="pjar">
+        <dt>문제</dt><dd>알람이 Nginx 5xx 기준이라 리다이렉션으로 처리되는 에러는 감지 불가. 소셜 가입 중복 계정 에러로 약 400명이 로그인하지 못하는 동안에도 알람이 울리지 않음</dd>
+        <dt>조치</dt>
+        <dd>
+          <ul>
+            <li>Grafana에서 최근 1분간 ERROR 로그 1건 이상을 알람 조건으로 두고 Slack 발송, 메시지에 RequestId를 넣어 요청 단위로 추적</li>
+            <li>슬로우 쿼리 1초 기준 알람을 개발팀 전용 채널로 분리</li>
+          </ul>
+        </dd>
+        <dt class="res">결과</dt><dd class="res">5xx에 안 잡히던 에러와 슬로우 쿼리까지 알람 대상으로 확대. 누적 가입 오류는 RequestId로 추적해 동시성 문제로 확정하고 유니크 키 제약으로 차단. 같은 방식을 사내 다른 프로젝트에도 적용</dd>
+      </dl>
+    </div>
+
+    <div class="take">
+      <p class="kick">이 사례에서 가져가는 것</p>
+      <p>사용자 요청 경로에는 그 순간 꼭 필요한 일만 남기고, 나머지는 다시 시도할 수 있는 곳으로 보냅니다. 알람은 서버 응답 코드가 아니라 <b>사용자가 실제로 겪는 실패</b>를 기준으로 겁니다.</p>
+    </div>
   </div>
+  <footer class="foot"><span>이강일 · BACKEND PORTFOLIO</span><span><b>05</b> / 09</span></footer>
 </section>
 
+<!-- ============ CASE 04 ============ -->
+<section class="page case" id="case-04">
+  <div class="page-body">
+    <div class="case-head">
+      <div>
+        <p><span class="case-no">CASE 04</span><span class="case-meta">디라이트 파트너 · QGX · 2025.03 ~</span></p>
+        <h2 class="h2">AI 리포트 조회를 <br>SQL 생성에서 API Tool 호출로</h2>
+      </div>
+      <div class="metric"><b>2분 → 10초</b><span>리포트 1건 생성</span></div>
+    </div>
+    <p class="lede">AI가 매번 SQL을 만들어 DB를 직접 읽게 두는 대신, 도메인 규칙이 이미 들어 있는 백엔드 API를 Tool로 부르게 바꿨습니다.</p>
+    <p class="boundary"><b>역할 경계</b> &nbsp;AI 파이프라인 본체(워크플로우 · 프롬프트)는 AI 담당 동료 몫. 본인은 느린 원인 분석, 조회 방식 전환, Agent가 호출할 API Tool 제공</p>
 
-<section class="sec wrap" id="summary">
-  <div class="sec-head">
-    <p class="eyebrow">Summary</p>
-    <h2 class="h2 split">한눈에 보는 경력</h2>
-    <p class="sub">Java/Spring Boot 8년차 백엔드 개발자, 현재 백엔드 개발 리드입니다. 미국 신재생 에너지 투자 플랫폼에서 투자 · 결제 · KYC/AML · 에스크로 도메인을 기획 단계부터 구축 · 운영했고, 지금은 제조 현장 모니터링 솔루션에서 설비 TCP 입수 → Kafka 메시지 처리 → 저장 · 집계 API 구간과 고객사 기간계 연동을 맡고 있습니다.</p>
+    <figure class="fig">
+      <div class="flow">
+        <span class="tag-l">전</span>
+        <div class="nd">Agent</div><div class="ar"></div>
+        <div class="nd hot">SQL 생성<small>매번 새로 만듦</small></div><div class="ar"></div>
+        <div class="nd hot">DB 직접 조회<small>느림 · 의도와 다른 데이터</small></div><div class="ar"></div>
+        <div class="nd">리포트<small>약 2분</small></div>
+      </div>
+      <div class="flow">
+        <span class="tag-l">후</span>
+        <div class="nd">Agent</div><div class="ar"></div>
+        <div class="nd key">REST API Tool<small>사전 정의</small></div><div class="ar"></div>
+        <div class="nd ok">백엔드 API<small>도메인 규칙 포함</small></div><div class="ar"></div>
+        <div class="nd ok">리포트<small>약 10초</small></div>
+      </div>
+      <figcaption>LangGraph 흐름에서 조회가 일어나는 지점만 Tool 호출로 바꾸고, 나머지 흐름은 그대로 둠</figcaption>
+    </figure>
+
+    <dl class="pjar">
+      <dt>문제</dt><dd>리포트 1건 생성에 약 2분. Agent가 SQL을 생성해 DB를 직접 조회하는 구간이 느리고, 생성된 쿼리가 의도와 다른 데이터를 가져와 원하지 않는 답변이 나오는 상태</dd>
+      <dt>판단</dt><dd>매번 쿼리를 생성하게 두는 대신 도메인 규칙이 이미 들어 있는 백엔드 API를 Tool로 호출하게 하면, 느린 조회 구간과 의도와 다른 쿼리가 생기는 경로를 함께 없앨 수 있다고 판단</dd>
+      <dt>조치</dt>
+      <dd>
+        <ul>
+          <li>LangGraph 흐름에서 조회가 일어나는 지점을 파악해 필요한 조회를 사전 정의된 REST API Tool로 제공</li>
+          <li>AI 담당 동료와 Tool 명세, 요청 · 응답 계약 협의</li>
+        </ul>
+      </dd>
+      <dt class="res">결과</dt><dd class="res">리포트 1건 생성 2분 → 10초. 해당 리포트 흐름의 SQL 생성 · 직접 조회 구간을 Tool 호출로 대체했고, 이후 리포트도 같은 Tool 계약을 재사용</dd>
+    </dl>
+
+    <div class="take">
+      <p class="kick">이 사례에서 가져가는 것</p>
+      <p>AI 기능이 느리거나 엉뚱한 답을 낼 때, 모델이나 프롬프트보다 먼저 <b>데이터를 어디서 어떻게 가져오는지</b>를 봅니다. 이미 검증된 백엔드 API를 Tool로 열어 주는 것이 백엔드 개발자가 AI 기능에 가장 직접 기여할 수 있는 지점이라고 생각합니다.</p>
+    </div>
   </div>
-  <div class="sum">
-    <div class="sum-row"><h3>데이터 파이프라인</h3><p>한 프로세스에 묶여 있던 레거시를 <b>Kafka 기반 입수 · 처리 서비스로 분리</b>해 운영 적용. 수동 ACK · 메시지 상태 기록 · 원본 메시지 보관으로 실패 건 추적과 재처리 경로 확보</p></div>
-    <div class="sum-row"><h3>투자 · 결제 도메인</h3><p>미국 증권 규정(Reg CF · Reg D · Reg A)의 투자 한도 · 취소 기한 · 재동의를 <b>검증 규칙과 상태 모델</b>로 구현. 에스크로(North Capital) · KYC(Persona) · 신용카드(Stripe) 외부 연동</p></div>
-    <div class="sum-row"><h3>비동기 · 연동</h3><p>회원가입 외부 연동을 <b>SQS + DLQ 컨슈머로 분리해 4초 → 1초</b>. API를 열 수 없는 고객사 기간계(AS400 · MSSQL)는 read-only 일 배치로 연동</p></div>
-    <div class="sum-row"><h3>성능</h3><p>서버 기동 <b>3분 → 7초</b>. AI 리포트 조회를 REST API Tool 호출로 바꿔 <b>2분 → 10초</b></p></div>
-    <div class="sum-row"><h3>리딩</h3><p>리뷰 규칙과 배포 흐름을 정비해 <b>배포 12분 → 4분</b>. SaaS 전환 정부지원사업 기술 리딩, <b>TTA · KACI 클라우드 서비스 시험 통과</b></p></div>
-  </div>
+  <footer class="foot"><span>이강일 · BACKEND PORTFOLIO</span><span><b>06</b> / 09</span></footer>
 </section>
 
-<section class="sec wrap" id="impact">
-  <div class="sec-head">
-    <p class="eyebrow">Impact</p>
-    <h2 class="h2 split">운영 환경에서 잰 전후 숫자</h2>
+<!-- ============ CASE 05 ============ -->
+<section class="page case" id="case-05">
+  <div class="page-body">
+    <div class="case-head">
+      <div>
+        <p><span class="case-no">CASE 05</span><span class="case-meta">일루미나리안 2024 → 디라이트 파트너 2025.03 ~</span></p>
+        <h2 class="h2">리뷰 · 배포 흐름을 팀과 만들고, <br>그 경험을 다음 회사로 가져가기</h2>
+      </div>
+      <div class="metric"><b>12분 → 4분</b><span>배포 1회</span></div>
+    </div>
+    <p class="lede">앞 회사에서는 Git을 잘 쓰던 팀의 리뷰와 배포를 다듬었고, 지금 회사에서는 형상관리 도구를 쓰지 않던 팀에 브랜치 · PR · 리뷰와 이미지 배포 절차를 도입했습니다.</p>
+
+    <div class="two">
+      <div class="col">
+        <h3>일루미나리안</h3>
+        <p class="when">2024 · 13명 팀 프로젝트 리드</p>
+        <ul>
+          <li><b>리뷰 규칙</b>1명 이상 승인 후 머지 · 커버리지 80%를 제안해 팀과 정하고 Protection Rule로 강제<br><span class="to">→ KPT 회고 Keep: "코드리뷰가 개발 플로우의 일부로 자리잡았다"</span></li>
+          <li><b>검증과 배포 분리</b>배포 때마다 테스트 점검까지 돌던 흐름을, 검증은 PR(테스트 · OpenAPI · Sonar, 결과는 PR 댓글)에서 끝내고 배포는 배포만 하도록 팀과 함께 재설계<br><span class="to">→ 배포 1회 12분 → 4분</span></li>
+          <li><b>배포 실행 단순화</b>머지 시 이미지 빌드, 배포는 환경 · 태그만 골라 실행<br><span class="to">→ 기획 · PM도 협의된 버전을 직접 반영</span></li>
+        </ul>
+      </div>
+      <div class="bridge" aria-hidden="true">→</div>
+      <div class="col">
+        <h3>디라이트 파트너</h3>
+        <p class="when">2025.03 ~ · 백엔드 개발 리드</p>
+        <ul>
+          <li><b>Git · PR · 리뷰 도입</b>형상관리 없이 각자 PC에서 고쳐 배포하던 팀에 브랜치 전략 · PR 템플릿 · 필수 리뷰어 도입<br><span class="to">→ 업체마다 달라지던 코드를 같은 기준으로 배포</span></li>
+          <li><b>Docker 이미지 + CD</b>빌드 결과물을 매번 수동으로 올리던 배포를 미리 만든 이미지 배포로<br><span class="to">→ 배포 시간 단축</span></li>
+          <li><b>AI 개발 도구 팀 도입</b>온보딩과 리뷰 · 테스트 기준을 저장소 설정으로 통일<br><span class="to">→ 대시보드 하나에 몇 달 걸리던 팀원이 1년 뒤 여러 업체를 동시에 맡고, 문서도 자동화</span></li>
+          <li><b>헬프데스크 단독 구축</b>흩어진 고객사 소통 창구를 기획부터 배포까지 혼자 만든 헬프데스크로 통합<br><span class="to">→ 요청 창구 혼선 제거</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <figure class="fig" style="margin-top:14px">
+      <p class="kick" style="margin-bottom:6px">일루미나리안 · 배포 흐름</p>
+      <div class="flow">
+        <span class="tag-l">전</span>
+        <div class="nd">머지</div><div class="ar"></div>
+        <div class="nd hot">테스트 · 검사<small>배포 때마다</small></div><div class="ar"></div>
+        <div class="nd">빌드</div><div class="ar"></div>
+        <div class="nd">배포<small>1회 12분</small></div>
+      </div>
+      <div class="flow">
+        <span class="tag-l">후</span>
+        <div class="nd key">PR에서 검증<small>테스트 · Sonar · 리뷰</small></div><div class="ar"></div>
+        <div class="nd">머지 시 이미지</div><div class="ar"></div>
+        <div class="nd ok">배포만<small>환경 · 태그 선택 · 4분</small></div>
+      </div>
+      <p class="kick" style="margin:14px 0 6px">디라이트 파트너 · 개발 · 배포 흐름</p>
+      <div class="flow">
+        <span class="tag-l">전</span>
+        <div class="nd hot">각자 PC에서 수정<small>형상관리 없음</small></div><div class="ar"></div>
+        <div class="nd">수동 빌드</div><div class="ar"></div>
+        <div class="nd hot">업체별 배포<small>업체마다 코드가 다름</small></div>
+      </div>
+      <div class="flow">
+        <span class="tag-l">후</span>
+        <div class="nd key">브랜치 · PR · 리뷰</div><div class="ar"></div>
+        <div class="nd">Docker 이미지</div><div class="ar"></div>
+        <div class="nd ok">CD 배포<small>같은 코드 기준</small></div>
+      </div>
+    </figure>
+
+    <div class="take" style="margin-top:20px">
+      <p class="kick">이 사례에서 가져가는 것</p>
+      <p>규칙은 혼자 정하지 않고 제안해서 팀과 합의한 뒤 도구로 강제합니다. 사람마다 다르던 기준이 저장소와 파이프라인에 남아야, 사람이 바뀌어도 같은 검증 · 배포 절차를 따르게 된다고 생각합니다.</p>
+    </div>
   </div>
-  <div class="impact">
-    <div class="row" data-ratio="0.0389">
-      <div><h3>서버 기동 시간</h3><p class="ctx">QGX · 네이티브 쿼리 전량 파싱과 불필요한 빈 로딩 정리</p></div>
-      <div class="bar"><i class="before"></i><i class="fill" style="width:3.89%"></i><span class="tag">수정 전 3분 = 100%</span></div>
-      <div class="val"><small>3분 →</small><b>7초</b></div>
-    </div>
-    <div class="row" data-ratio="0.0833">
-      <div><h3>AI 리포트 1건 생성</h3><p class="ctx">QGX · SQL 생성 조회를 REST API Tool 호출로 전환</p></div>
-      <div class="bar"><i class="before"></i><i class="fill" style="width:8.33%"></i><span class="tag">수정 전 2분 = 100%</span></div>
-      <div class="val"><small>2분 →</small><b>10초</b></div>
-    </div>
-    <div class="row" data-ratio="0.25">
-      <div><h3>회원가입 API 평균 응답</h3><p class="ctx">EnergySharesUS · 외부 연동을 SQS 컨슈머로 분리</p></div>
-      <div class="bar"><i class="before"></i><i class="fill" style="width:25%"></i><span class="tag">수정 전 4초 = 100%</span></div>
-      <div class="val"><small>4초 →</small><b>1초</b></div>
-    </div>
-  </div>
-  <p class="impact-note">막대 길이 = 수정 후 ÷ 수정 전. 항목마다 수정 전 값을 100%로 둔 비율입니다.</p>
+  <footer class="foot"><span>이강일 · BACKEND PORTFOLIO</span><span><b>07</b> / 09</span></footer>
 </section>
 
-<section class="sec wrap" id="career">
-  <div class="sec-head">
-    <p class="eyebrow">Career · 2017.10 – 현재</p>
-    <h2 class="h2 split">경력</h2>
-  </div>
-  <div class="cos2">
-    <article class="co">
-      <header class="co-head">
-        <div class="co-id"><p class="when">2025.03 – 현재</p><h3>디라이트 파트너</h3><p class="role">백엔드 개발 리드</p></div>
-        <ul class="co-bul"><li>제조 현장 모니터링 솔루션 <b>QGX</b> 백엔드 리드: 설비 TCP 입수 → <b>Kafka 메시지 처리 → 저장 · 집계 API</b> 구간 담당, 레거시 단일 프로세스를 입수 · 처리 서비스로 분리</li><li>고객사 기간계(AS400 · MSSQL) read-only 일 배치 연동, AI 리포트용 <b>조회 REST API Tool</b> 설계 · 구현</li><li>SaaS 전환 정부지원사업 <b>기술 리딩</b>: 고객사별 물리 DB 격리 · 설치형 배포 Docker 컨테이너화 · Kubernetes 배포 구조 설계 참여, <b>TTA · KACI 클라우드 서비스 시험 통과</b></li></ul>
-      </header>
-      <div class="co-proj"><p class="co-pn">QGX · 제조 현장 모니터링 솔루션</p><p class="co-pi">고객사 공장에 서버를 설치하는 온프레미스 제품. 현장 클라이언트가 설비 값을 읽어 TCP로 보내면 서버가 받아 저장 · 집계하고, 가동률 · 비가동 · 불량 지표를 현장 대시보드로 보여줌.</p><p class="ast">Java 21 · Spring Boot 3.2 · Spring Data JPA · QueryDSL · MySQL 8.4 · Kafka · Netty · Docker</p></div>
-      <div class="case-lead" id="pipeline">
-        <p class="c-src">QGX · 2025.10 – · 대표 사례</p>
-        <h4 class="lead-h">한 프로세스에 묶여 있던 입수와 처리를 나눴습니다</h4>
-        <p class="sub">입수 · 처리 · 웹이 한 프로세스에 묶여 장애 격리와 독립 배포가 불가했고, TCP로 받은 데이터를 같은 프로세스에서 동기로 후처리해 후처리가 실패하면 데이터가 그대로 유실됐습니다.</p>
-      </div>
-      <div class="pipe-grid">
-    <div class="steps">
-      <div class="step on" data-step="1">
-        <p class="k">01 / 분리 기준</p>
-        <h3>도메인 대신 기술적 책임으로 먼저 자름</h3>
-        <p>도메인 경계를 지금 긋기엔 이르다고 보고 1차 기준을 입수 · 처리 · 웹으로 정했습니다. 독립 배포와 오너십이 필요해질 때마다 하나씩 떼어내는 순서입니다.</p>
-        <ul><li>입수: Netty → Kafka Producer</li><li>처리: Kafka Consumer → JPA</li><li>웹: 조회·집계 API</li></ul>
-      </div>
-      <div class="step" data-step="2">
-        <p class="k">02 / 상태 기록</p>
-        <h3>메시지마다 어디까지 갔는지 남김</h3>
-        <p>재처리에는 메시지 영속이 필요해 in-memory queue 대신 Kafka를 골랐습니다. 수동 ACK로 처리 완료 시점을 직접 정하고, 메시지 상태를 기록합니다.</p>
-        <ul><li>CONSUMING → PROCESSING → SUCCESS / FAILED</li><li>traceId · requestId를 Kafka 헤더와 MDC로 넘겨 입수 로그와 처리 로그를 같은 ID로 연결</li></ul>
-      </div>
-      <div class="step" data-step="3">
-        <p class="k">03 / 원본 보관과 재처리</p>
-        <h3>실패한 건 원본으로 다시 돌림</h3>
-        <p>원본 JSON, requestId, topic · partition · offset을 원본 메시지 테이블에 보관합니다. 실패 메시지는 단건 · 배치 · 이벤트 유형별 재처리 API로 다시 처리합니다.</p>
-        <ul><li>입수 · 처리 분리를 운영에 적용</li><li>후처리 실패 시에도 원본 메시지 · requestId · offset 기준으로 원인 확인과 재처리 가능</li></ul>
-      </div>
-    </div>
-    <div class="stage">
-      <div class="stage-box">
-        <svg id="pipe" viewBox="0 0 960 430" data-focus="1" role="img" aria-label="설비 세 대가 TCP로 입수 서비스에 보내고, Kafka 파티션 세 개를 거쳐 처리 서비스가 MySQL과 원본 메시지 테이블에 저장하며, 실패 건은 재처리 API로 다시 처리되는 흐름도"></svg>
-        <noscript><p class="pipe-fallback">설비 A · B · C → TCP → 입수 서비스(Netty · Kafka Producer) → Kafka 파티션 3개 → 처리 서비스(Consumer · JPA) → MySQL · 원본 메시지 테이블 → 실패 건은 재처리 API</p></noscript>
-        <div class="counters"><span class="c-ok">SUCCESS <b id="cOk">0</b></span><span class="c-ng">FAILED <b id="cNg">0</b></span><span class="c-re">재처리 <b id="cRe">0</b></span></div>
-        <div class="plog" id="plog"></div>
-      </div>
-      <p class="demo-note">흐름도의 메시지와 숫자는 동작을 보여주는 시뮬레이션입니다.</p>
-    </div>
-  </div>
-      <div class="track">
-        <article class="card">
-          <div class="c-head">
-            <p class="c-src">QGX · 2025</p>
-            <h3>서버 기동 시간 단축</h3>
-            <p class="res">3분 → 7초</p>
-          </div>
-          <div class="c-body">
-            <ol class="trio"><li class="q-p"><b>문제</b><span>기동에 약 3분. 네이티브 쿼리가 JPQL로 인식되어 기동 시 전량 파싱·검증되는 구조와 불필요한 빈 로딩이 원인</span></li><li class="q-r"><b>결과</b><span>기동 3분 → 7초</span></li></ol>
-            <details class="more"><summary><span>조치 보기</span><i class="pm" aria-hidden="true"></i></summary>
-            <div class="more-body"><ul class="chips"><li>해당 쿼리를 Repository 구현체와 JPA Method로 교체</li><li>불필요한 빈 로딩 · 의존성 정리</li></ul></div>
-            </details>
-          </div>
-        </article>
-        <article class="card">
-          <div class="c-head">
-            <p class="c-src">QGX · 2025.03 –</p>
-            <h3>AI 리포트 응답 개선: SQL 생성 조회를 API Tool 호출로</h3>
-            <p class="res">2분 → 10초</p>
-          </div>
-          <div class="c-body">
-            <ol class="trio"><li class="q-n"><b>경계</b><span>AI 파이프라인 본체(워크플로우 · 프롬프트)는 AI 담당 동료. 본인은 느린 원인 분석과 조회 방식 전환, Agent가 호출할 API Tool 제공</span></li><li class="q-p"><b>문제</b><span>리포트 1건 생성에 약 2분. Agent가 SQL을 생성해 DB를 직접 조회하는 구간이 느리고, 생성된 쿼리가 의도와 다른 데이터를 가져오는 상태</span></li><li class="q-j"><b>판단</b><span>도메인 규칙이 이미 들어 있는 백엔드 API를 LangGraph 흐름에서 Tool로 호출하게 하면 느린 조회와 의도와 다른 쿼리 경로를 함께 없앨 수 있다고 판단</span></li><li class="q-r"><b>결과</b><span>리포트 1건 생성 2분 → 10초, SQL 생성 · 직접 조회 단계 제거</span></li></ol>
-            <details class="more"><summary><span>흐름 · 조치 보기</span><i class="pm" aria-hidden="true"></i></summary>
-            <div class="more-body"><div class="mf" aria-hidden="true"><div class="mf-row slow"><span class="mf-k">전</span><ol><li>Agent</li><li class="bad">SQL 생성</li><li class="bad">DB 직접 조회</li></ol></div><div class="mf-row fast"><span class="mf-k">후</span><ol><li>Agent</li><li class="good">API Tool</li><li>백엔드 API</li><li>DB</li></ol></div></div><p class="sk2">조치</p><ul class="chips"><li>조회 지점 파악</li><li>사전 정의 REST API Tool</li><li>AI 담당 동료와 명세 · 계약 협의</li></ul><p class="note">파이프라인 본체(워크플로우 · 프롬프트)는 AI 담당 동료 몫</p></div>
-            </details>
-          </div>
-        </article>
-        <article class="card">
-          <div class="c-head">
-            <p class="c-src">QGX · 2025.06 –</p>
-            <h3>고객사 기간계 시스템 연동 일 배치 (AS400 · MSSQL)</h3>
-            <p class="res">read-only 일 배치</p>
-          </div>
-          <div class="c-body">
-            <ol class="trio"><li class="q-p"><b>문제</b><span>고객사가 API를 열어줄 수 없는 환경이라 생산계획 · 비가동 · 보전 · 불량 데이터를 기존 방식으로 수집 불가, 원본 코드값도 고객사 내부 규칙 그대로</span></li><li class="q-j"><b>판단</b><span>운영계에 쓰기 사고나 부하를 주면 안 되므로 read-only 계정과 별도 커넥션 전제. 계획 · 보전 이력은 일 단위로 확정되고 실시간 구간은 설비 수집이 맡아 일 배치로 충분하다고 판단</span></li><li class="q-r"><b>결과</b><span>설비 실적과 기간계의 계획 · 보전 이력을 같은 기준으로 대조 가능, 가동률 · 불량률 산정 근거 보강</span></li></ol>
-            <details class="more"><summary><span>흐름 · 조치 보기</span><i class="pm" aria-hidden="true"></i></summary>
-            <div class="more-body"><div class="mf" aria-hidden="true"><div class="mf-row fast"><span class="mf-k"></span><ol><li>기간계</li><li class="good">read-only</li><li>일 배치</li><li>재분류</li><li>집계</li></ol></div></div><p class="sk2">조치</p><ul class="chips"><li>JT400 read-only</li><li>멀티 데이터소스</li><li>4종 일 배치</li><li>유형 마스터 재분류</li><li>멱등 적재 / is_latest</li></ul></div>
-            </details>
-          </div>
-        </article>
-        <article class="card">
-          <div class="c-head">
-            <p class="c-src">디라이트 파트너 · 2025.03 – 2026.02</p>
-            <h3>SaaS 전환 정부지원사업 기술 리딩 · TTA · KACI 시험 대응</h3>
-            <p class="res">시험 통과</p>
-          </div>
-          <div class="c-body">
-            <ol class="trio"><li class="q-p"><b>문제</b><span>고객사마다 서버를 설치하는 구조의 SaaS 전환을 정부지원사업으로 수행, 시험기관(TTA · KACI)의 클라우드 서비스 항목 시험 통과가 사업 요건</span></li><li class="q-j"><b>판단</b><span>PM 부재 상황에서 일정 · 외부 업체 협의 · 기술 의사결정 담당</span></li><li class="q-r"><b>결과</b><span>TTA · KACI 클라우드 서비스 시험 통과, 사업 요건 충족</span></li></ol>
-            <details class="more"><summary><span>흐름 · 조치 보기</span><i class="pm" aria-hidden="true"></i></summary>
-            <div class="more-body"><p class="sk2">조치</p><ul class="chips"><li>고객사별 물리 DB 격리</li><li>설치형 배포 Docker 컨테이너화</li><li>요구사항추적표 기준 교차 점검</li></ul></div>
-            </details>
-          </div>
-        </article>
-      </div>
-    </article>
-
-    <article class="co">
-      <header class="co-head">
-        <div class="co-id"><p class="when">2019.12 – 2025.02</p><h3>일루미나리안</h3><p class="role">팀원 → 프로젝트 리드 (2024.03~)</p></div>
-        <ul class="co-bul"><li>미국 신재생 에너지 투자 플랫폼 <b>EnergySharesUS</b>: 기획 단계부터 합류해 회원 · 인증 · <b>투자 · 결제 · 정산</b> 도메인 백엔드 설계 · 구축과 운영</li><li>2024.03부터 프로젝트 리드(13명 팀, 백엔드 2명 리드)</li><li>일본 플랫폼 EnergySharesJP: 회원 · 투자 처리 · 정산 API (Go · Echo)</li></ul>
-      </header>
-      <div class="co-proj"><p class="co-pn">EnergySharesUS · 미국 신재생 에너지 크라우드 펀딩 플랫폼</p><p class="co-pi">미국 개인 · 법인 투자자 대상 플랫폼. 기획 단계부터 합류해 회원가입 · 소셜 로그인 · 공인 투자자 인증 · 투자 도메인 담당.</p><p class="ast">Java · Spring Boot 3.2 · JPA · QueryDSL · MySQL 8 · Flyway · AWS (SQS · Lambda · ECS · RDS · S3 · ElastiCache) · Redis · Spring Security · JWT · Grafana · Testcontainers</p></div>
-      <div class="track">
-        <article class="card">
-          <div class="c-head">
-            <p class="c-src">EnergySharesUS · 2021.12 – 2024</p>
-            <h3>투자 · 결제 · 에스크로 도메인 설계: 규정 요구사항을 상태와 검증 규칙으로</h3>
-            <p class="res">검증 규칙 12개</p>
-          </div>
-          <div class="c-body">
-            <ol class="trio"><li class="q-p"><b>문제</b><span>미국 증권 규정(Reg CF · Reg D · Reg A)이 투자 한도 · 취소 기한 · 조건 변경 재동의를 요구하고, 에스크로 · KYC/AML · 문서 보관은 제약이 서로 다른 외부 서비스에 의존</span></li><li class="q-j"><b>판단</b><span>투자 상태가 에스크로(North Capital) 거래 상태와 1:1로 맞물리는 구조라 상태를 늘리지 않고 재동의는 플래그로 분리. 웹훅 부재 · 호출 제한 · 검증 실패 같은 외부 제약은 우리 쪽 상태와 배치로 흡수</span></li><li class="q-r"><b>결과</b><span>규제 한도 · 결제 한도 · 취소 기한을 투자와 취소 때마다 같은 규칙으로 검증. 신용카드 투자 오픈(2023 4분기)</span></li></ol>
-            <details class="more"><summary><span>흐름 · 조치 보기</span><i class="pm" aria-hidden="true"></i></summary>
-            <div class="more-body"><div class="mf" aria-hidden="true"><div class="mf-row fast"><span class="mf-k"></span><ol><li>투자 요청</li><li class="good">규칙 12개 검증</li><li>비관적 락</li><li>NC Trade</li><li>웹훅 동기화</li></ol></div></div><p class="sk2">조치</p><ul class="chips"><li>투자 검증 12개 규칙</li><li>Reg CF 한도: 투자 시 차감 · 취소 시 복원</li><li>롤링 12개월 1회 수정 제한</li><li>Material change 재동의 플래그</li><li>NC 상태 매핑 CREATED → FUNDED → SETTLED · UNWIND</li><li>몰리는 구간 비관적 락</li><li>보너스 쉐어즈 · 중간인출 상태</li></ul><p class="note">마감 알림 직후 몰리는 요청은 당시 규모에서 분산 락보다 DB 트랜잭션 안의 비관적 락으로 충분하다고 판단</p></div>
-            </details>
-          </div>
-        </article>
-        <article class="card">
-          <div class="c-head">
-            <p class="c-src">EnergySharesUS · 2024.04</p>
-            <h3>회원가입 외부 연동 비동기 전환</h3>
-            <p class="res">4초 → 1초</p>
-          </div>
-          <div class="c-body">
-            <ol class="trio"><li class="q-p"><b>문제</b><span>외부 KYC · 이메일 · 서드파티 호출이 동기로 직렬화돼 평균 4초, 외부 지연 시 7초 이상. 외부 장애가 곧 회원가입 실패로 노출</span></li><li class="q-j"><b>판단</b><span>즉시 필요한 건 가입 접수 완료 여부 하나뿐. 브로커는 사내 메일 서비스가 이미 쓰던 SQS를 재사용</span></li><li class="q-r"><b>결과</b><span>회원가입 API 평균 4초 → 1초. 외부 서비스 실패의 사용자 요청 전파 차단</span></li></ol>
-            <details class="more"><summary><span>흐름 · 조치 보기</span><i class="pm" aria-hidden="true"></i></summary>
-            <div class="more-body"><div class="mf" aria-hidden="true"><div class="mf-row slow"><span class="mf-k">전</span><ol><li>가입 API</li><li class="bad">KYC</li><li class="bad">이메일</li><li class="bad">서드파티</li></ol></div><div class="mf-row fast"><span class="mf-k">후</span><ol><li>가입 API</li><li class="good">SQS</li><li>컨슈머</li><li class="warn">DLQ → 재시도</li></ol></div></div><p class="sk2">조치</p><ul class="chips"><li>DB 저장 + SQS 발행만</li><li>컨슈머 분리</li><li>retry count · error 기록</li><li>DLQ → 3회까지 재전송</li><li>Slack 실패 알림</li></ul></div>
-            </details>
-          </div>
-        </article>
-        <article class="card">
-          <div class="c-head">
-            <p class="c-src">EnergySharesUS · 2024</p>
-            <h3>리뷰 · 배포 흐름 재설계: 검증은 PR에서, 배포는 배포만</h3>
-            <p class="res">12분 → 4분</p>
-          </div>
-          <div class="c-body">
-            <ol class="trio"><li class="q-p"><b>문제</b><span>배포할 때마다 테스트 점검까지 함께 수행돼 배포 1회에 12분</span></li><li class="q-j"><b>판단</b><span>검증은 코드가 들어오는 PR 시점에서 끝내고, 배포 단계는 배포만 하도록 분리. 리뷰 규칙은 제안해 팀과 함께 정하고 Protection Rule로 강제</span></li><li class="q-r"><b>결과</b><span>배포 12분 → 4분. 환경 · 태그 선택 실행으로 단순해져 기획 · PM도 협의된 버전을 직접 반영</span></li></ol>
-            <details class="more"><summary><span>흐름 · 조치 보기</span><i class="pm" aria-hidden="true"></i></summary>
-            <div class="more-body"><div class="mf" aria-hidden="true"><div class="mf-row slow"><span class="mf-k">전</span><ol><li>머지</li><li class="bad">테스트 · 검사</li><li>빌드</li><li>배포</li></ol></div><div class="mf-row fast"><span class="mf-k">후</span><ol><li class="good">PR: 테스트 · Sonar · 리뷰</li><li>머지: 이미지</li><li>배포만</li></ol></div></div><p class="sk2">조치</p><ul class="chips"><li>PR마다 테스트 · OpenAPI · SonarQube</li><li>결과를 PR 댓글로</li><li>리뷰어 자동 지정 · 라벨</li><li>머지 시 이미지 빌드</li><li>배포는 환경 · 태그 · 설정 라벨만 골라 실행</li><li>Slack 배포 알림</li></ul><p class="note">릴리즈 주기: QA 주 1회(화), STG · PROD 3주 1회. 버전은 스프린트 버전 + 배포 회차, Jira Releases로 관리</p></div>
-            </details>
-          </div>
-        </article>
-        <article class="card">
-          <div class="c-head">
-            <p class="c-src">EnergySharesUS · 2022.08 – 2023.03</p>
-            <h3>감사 로그 구조 재설계: 요청 단위 변경 이력</h3>
-            <p class="res">요청 단위 이력</p>
-          </div>
-          <div class="c-body">
-            <ol class="trio"><li class="q-p"><b>문제</b><span>JPA Envers로 엔티티마다 _history 테이블이 생겨 관리 대상이 계속 증가, 한 요청에서 무엇이 함께 바뀌었는지 추적 불가</span></li><li class="q-r"><b>결과</b><span>운영팀이 RequestId 기준으로 한 요청의 변경 이력을 한 번에 조회. _history 테이블 관리 부담 제거</span></li></ol>
-            <details class="more"><summary><span>조치 보기</span><i class="pm" aria-hidden="true"></i></summary>
-            <div class="more-body"><ul class="chips"><li>Envers 대신 커스텀 EntityListener로 변경 전후 기록</li><li>엔티티별 _history → 단일 audit_log</li><li>API 호출마다 RequestId 발급</li><li>@ApiEvent로 이벤트 종류 표시</li></ul></div>
-            </details>
-          </div>
-        </article>
-        <article class="card">
-          <div class="c-head">
-            <p class="c-src">EnergySharesUS · 2024.09</p>
-            <h3>운영 알람 재설계: Nginx 5xx 기준의 사각지대 해소</h3>
-            <p class="res">ERROR 1분 내 알람</p>
-          </div>
-          <div class="c-body">
-            <ol class="trio"><li class="q-p"><b>문제</b><span>알람이 Nginx 5xx 기준이라 리다이렉션으로 처리되는 에러는 감지 불가. 소셜 가입 중복 계정 에러로 약 400명이 로그인하지 못하는 동안에도 알람이 울리지 않음</span></li><li class="q-r"><b>결과</b><span>에러와 슬로우 쿼리를 누적 전에 실시간으로 인지. 누적 가입 오류는 RequestId로 추적해 동시성 문제로 확정, 유니크 키 제약으로 차단. 같은 방식을 사내 다른 프로젝트에도 적용</span></li></ol>
-            <details class="more"><summary><span>흐름 · 조치 보기</span><i class="pm" aria-hidden="true"></i></summary>
-            <div class="more-body"><div class="mf" aria-hidden="true"><div class="mf-row fast"><span class="mf-k"></span><ol><li>ERROR 로그</li><li class="good">Grafana</li><li>Slack · RequestId</li><li>사내 확산</li></ol></div></div><p class="sk2">조치</p><ul class="chips"><li>Grafana 1분 ERROR 1건 · 대기 0</li><li>Slack에 RequestId</li><li>Error 전용 대시보드 패널</li><li>슬로우 쿼리 1초 전용 채널</li><li>PROD 배포 체크리스트 알람 담당</li><li>JSON 로그 · 비밀번호 마스킹</li><li>QA · 비개발자용 Request-ID 찾기 가이드</li><li>유니크 키 제약</li></ul></div>
-            </details>
-          </div>
-        </article>
-        <article class="card">
-          <div class="c-head">
-            <p class="c-src">EnergySharesUS · 2023.04</p>
-            <h3>규제 대응 JWT 즉시 차단</h3>
-            <p class="res">즉시 로그아웃</p>
-          </div>
-          <div class="c-body">
-            <ol class="trio"><li class="q-p"><b>문제</b><span>운영자가 사용자를 DENIED로 바꿔도 이미 발급된 JWT는 만료 전까지 유효해 즉시 로그아웃 불가</span></li><li class="q-j"><b>판단</b><span>전체 세션 대신 차단 대상만 담고 토큰 만료 시각에 TTL을 맞추면 세션 저장소 없이 차단 목록 크기와 비용을 통제 가능</span></li><li class="q-r"><b>결과</b><span>운영자가 차단하면 해당 사용자 즉시 로그아웃. 컴플라이언스 요구 충족</span></li></ol>
-            <details class="more"><summary><span>흐름 · 조치 보기</span><i class="pm" aria-hidden="true"></i></summary>
-            <div class="more-body"><div class="mf" aria-hidden="true"><div class="mf-row fast"><span class="mf-k"></span><ol><li>운영자 DENIED</li><li class="good">Redis jti · TTL</li><li>요청 검증</li><li class="warn">401</li></ol></div></div><p class="sk2">조치</p><ul class="chips"><li>Redis(ElastiCache) jti</li><li>TTL = exp</li><li>검증 시 차단 목록 확인</li></ul></div>
-            </details>
-          </div>
-        </article>
-      </div>
-    </article>
-
-    <article class="co">
-      <header class="co-head">
-        <div class="co-id"><p class="when">2017.10 – 2019.11</p><h3>임플릿</h3><p class="role">팀원</p></div>
-        <ul class="co-bul"><li>케이블 방송사 SI: 콘텐츠 편성 · 배포 운영자 시스템 백엔드와 관리 UI 개발</li><li>셋톱 수집 · 진단 이력 조회 API, 지역 · 그룹 단위 편성 고도화</li></ul>
-      </header>
-      
-    </article>
-
-  </div>
-  <div class="edu">
-    <span><b>정보처리기사</b> · 2016.11</span>
-    <span><b>컴퓨터공학 학사</b> (학점은행제) · 2016</span>
-    <span><b>수원과학대학교</b> 컴퓨터정보계열 · 2011–2016</span>
-  </div>
-</section>
-
-<section class="sec wrap" id="archive" style="padding-top:0">
-  <div class="sec-head">
+<!-- ============ 그 밖에 한 일 ============ -->
+<section class="page" id="more">
+  <div class="page-body">
     <p class="eyebrow">More</p>
-    <h2 class="h2 split">그 밖에 한 일</h2>
-    <p class="sub">항목을 누르면 내용이 펼쳐집니다.</p>
-  </div>
-  <div class="arch">
-    <details class="aitem"><summary class="arow"><span class="y">2026.05–</span><span class="tt">사내 헬프데스크 단독 구축<small>기획부터 배포까지 혼자, 스펙 먼저 (SDD)</small></span><span class="wh">디라이트 파트너</span><i class="pm" aria-hidden="true"></i></summary><div class="abody"><ol class="steps-line"><li><span class="sk">문제</span><span class="sv">사내 요청 · 문의 창구가 따로 없던 상태</span></li><li><span class="sk">결과</span><span class="sv">운영 중</span></li></ol><p class="sk2">조치</p><ul class="chips"><li>기획 · 도메인 설계 · 컨벤션 문서 먼저</li><li>티켓 상태 전이 · 권한을 코드 제약으로</li><li>Flyway · REST Docs 테스트</li><li>문서는 결정 근거만</li></ul><p class="ast">Java 21 · Spring Boot · React · TypeScript</p></div></details>
-    <details class="aitem"><summary class="arow"><span class="y">2025.03–</span><span class="tt">Git 없던 팀에 PR 리뷰 흐름 도입<small>브랜치 → PR → 리뷰 → Merge</small></span><span class="wh">디라이트 파트너</span><i class="pm" aria-hidden="true"></i></summary><div class="abody"><ol class="steps-line"><li><span class="sk">문제</span><span class="sv">팀이 Git 없이 개발하던 상태</span></li><li><span class="sk">결과</span><span class="sv">브랜치 → PR → 리뷰 → Merge 흐름과 PR 템플릿 · 필수 리뷰어 도입</span></li></ol><p class="sk2">조치</p><ul class="chips"><li>브랜치 전략</li><li>PR 템플릿</li><li>필수 리뷰어</li></ul></div></details>
-    <details class="aitem"><summary class="arow"><span class="y">2024.11</span><span class="tt">N/O · A/O 이중 코드베이스 통합<small>v2.0.0 통합 PROD 배포의 코드 통합 담당</small></span><span class="wh">일루미나리안</span><i class="pm" aria-hidden="true"></i></summary><div class="abody"><ol class="steps-line"><li><span class="sk">문제</span><span class="sv">라이브 버전(A/O)을 동결한 채 신규 버전(N/O)을 따로 개발해 코드가 두 갈래</span></li><li><span class="sk">결과</span><span class="sv">통합 버전 PROD 배포</span></li></ol><p class="sk2">조치</p><ul class="chips"><li>A/O · 공통 · N/O 컴포넌트로 변경 추적</li><li>A/O 개발환경 머지 후 실행 확인</li><li>배포 체크리스트</li></ul></div></details>
-    <details class="aitem"><summary class="arow"><span class="y">2024.03</span><span class="tt">소셜 로그인 도입과 기존 OTP 흐름 연결<small>Spring OAuth2 Client 직접 구현</small></span><span class="wh">일루미나리안</span><i class="pm" aria-hidden="true"></i></summary><div class="abody"><ol class="steps-line"><li><span class="sk">문제</span><span class="sv">기존 필수 OTP 인증 흐름을 깨지 않고 소셜 로그인을 붙여야 했음</span></li><li><span class="sk">결과</span><span class="sv">2024년 일반 가입 약 5,000명, 소셜 가입 약 24,000명(같은 기간 마케팅 캠페인이 있어 단독 효과로 보지 않음)</span></li></ol><p class="sk2">조치</p><ul class="chips"><li>Google · Facebook</li><li>기존 OTP 흐름 연결</li><li>같은 이메일 계정 연결</li><li>도입 전 CVE 5건 영향 검토</li></ul></div></details>
-    <details class="aitem"><summary class="arow"><span class="y">2024.03–04</span><span class="tt">취약성 검사 · 모의해킹 결과 대응<small>런칭 전 보안 정비</small></span><span class="wh">일루미나리안</span><i class="pm" aria-hidden="true"></i></summary><div class="abody"><ol class="steps-line"><li><span class="sk">문제</span><span class="sv">로그아웃 후 세션 유지, 로그인 무제한 시도, 라이브러리 취약점 등 지적</span></li><li><span class="sk">결과</span><span class="sv">로그아웃 API · 로그인 잠금 정책 적용, oauth2-client 취약점 대응과 Spring Boot 업그레이드 후 v1.12.0 배포</span></li></ol><p class="sk2">조치</p><ul class="chips"><li>로그아웃 API (세션 무효화)</li><li>7회 실패 시 30분 잠금 · reCAPTCHA</li><li>비밀번호 리셋 링크 10분</li></ul></div></details>
-    <details class="aitem"><summary class="arow"><span class="y">2024</span><span class="tt">조회 API를 읽기 DB로 분리<small>MySQL 복제 읽기 · 쓰기 분리</small></span><span class="wh">일루미나리안</span><i class="pm" aria-hidden="true"></i></summary><div class="abody"><ol class="steps-line"><li><span class="sk">문제</span><span class="sv">여러 팀 · 서비스가 같은 DB에 붙으며 커넥션이 몰림</span></li><li><span class="sk">결과</span><span class="sv">쓰기 DB 커넥션에 여유 확보</span></li></ol><p class="sk2">조치</p><ul class="chips"><li>조회 전용 API를 읽기 DB로 이전</li><li>조회는 @Transactional(readOnly = true)</li></ul></div></details>
-    <details class="aitem"><summary class="arow"><span class="y">2023 4분기</span><span class="tt">신용카드 투자 결제 연동<small>North Capital + Stripe</small></span><span class="wh">일루미나리안</span><i class="pm" aria-hidden="true"></i></summary><div class="abody"><ol class="steps-line"><li><span class="sk">문제</span><span class="sv">카드 투자를 열어야 했지만 이전 결제 대행사에서 카드 수수료 23%가 부과되는 사고가 있었음</span></li><li><span class="sk">결과</span><span class="sv">1회 $5,000(수수료 포함 최대 $5,350) 한도로 카드 투자 오픈</span></li></ol><p class="sk2">조치</p><ul class="chips"><li>계정당 카드 1장</li><li>수수료 부담 주체 설정</li><li>진행 중 투자가 있으면 카드 수정 잠금</li></ul></div></details>
-    <details class="aitem"><summary class="arow"><span class="y">2023.08–09</span><span class="tt">배치 서비스를 AWS Lambda로 이전<small>배치 약 17종</small></span><span class="wh">일루미나리안</span><i class="pm" aria-hidden="true"></i></summary><div class="abody"><ol class="steps-line"><li><span class="sk">문제</span><span class="sv">시간 기반 작업(배지 · 한도 알림 · 취소 기한 · 입금 리마인더)을 별도 배치 서비스로 운영</span></li><li><span class="sk">결과</span><span class="sv">이전 완료. 미국 PT 기준 스케줄과 공휴일을 반영한 영업일 계산</span></li></ol><p class="sk2">조치</p><ul class="chips"><li>EventBridge 스케줄</li><li>로직은 백엔드 /api/batch/*</li><li>미국 공휴일 갱신</li></ul></div></details>
-    <details class="aitem"><summary class="arow"><span class="y">2023.08–23.10</span><span class="tt">가입 상태 분기 · MySQL 8 대응<small>FINRA 파트너 응답 기반 PENDING 분기, RDS 엔진 업그레이드 대응</small></span><span class="wh">일루미나리안</span><i class="pm" aria-hidden="true"></i></summary><div class="abody"><p class="sk2">조치</p><ul class="chips"><li>가입 직후 APPROVED → 파트너 응답에 따라 PENDING</li><li>법인 승인 로직 재사용</li><li>MySQL 8 변경점 확인 · Dialect 변경</li></ul></div></details>
-    <details class="aitem"><summary class="arow"><span class="y">2023.01–</span><span class="tt">스키마 버전 관리와 데이터 레이어 테스트<small>Flyway로 반영 경로 통일</small></span><span class="wh">일루미나리안</span><i class="pm" aria-hidden="true"></i></summary><div class="abody"><ol class="steps-line"><li><span class="sk">문제</span><span class="sv">ddl-auto=update와 수동 DDL이 섞여 QA 배포 후 엔티티 · 테이블 불일치 반복</span></li><li><span class="sk">결과</span><span class="sv">이후 QA · Stage · Production 불일치 없음</span></li></ol><p class="sk2">조치</p><ul class="chips"><li>ddl-auto=none</li><li>모든 변경 Flyway</li><li>Testcontainers로 쿼리 · 매핑 검증</li><li>@ControllerAdvice 응답 통일</li></ul></div></details>
-    <details class="aitem"><summary class="arow"><span class="y">2023–2024</span><span class="tt">결제 · KYC 엣지케이스 분석<small>ACH 계좌 변경 타이밍, KYC 비용 구조</small></span><span class="wh">일루미나리안</span><i class="pm" aria-hidden="true"></i></summary><div class="abody"><p class="sk2">조치</p><ul class="chips"><li>ACH 계좌 변경 시 기존 투자가 새 계좌에서 출금되는 경우 분석 · 대안 3가지</li><li>Persona → NC 내장 KYC 전환 비용 검토(건당 단가 비교)</li></ul></div></details>
-    <details class="aitem"><summary class="arow"><span class="y">2021.12–25.02</span><span class="tt">파일 업로드 구조 전환<small>Cognito 인증 + S3 직접 업로드</small></span><span class="wh">일루미나리안</span><i class="pm" aria-hidden="true"></i></summary><div class="abody"><ol class="steps-line"><li><span class="sk">문제</span><span class="sv">모바일 다중 업로드가 API Gateway 10MB 제한 · WAF 룰에 막혀 413 · 차단</span></li><li><span class="sk">결과</span><span class="sv">전송 부하가 백엔드에서 빠지고 업로드 실패 해소</span></li></ol><p class="sk2">조치</p><ul class="chips"><li>Cognito 인증</li><li>프론트 → S3 임시 경로 직접 업로드</li><li>백엔드는 URL만 받아 이동</li></ul></div></details>
-    <details class="aitem"><summary class="arow"><span class="y">2021.12–23.08</span><span class="tt">User Service 설계 문서<small>합류 첫 달에 v1~v8, 이후 v10까지 단독 작성</small></span><span class="wh">일루미나리안</span><i class="pm" aria-hidden="true"></i></summary><div class="abody"><ol class="steps-line"><li><span class="sk">문제</span><span class="sv">기획 단계라 회원 · 계정 도메인의 상태와 흐름이 정해지지 않은 상태</span></li><li><span class="sk">결과</span><span class="sv">회원 도메인 설계 기준 문서</span></li></ol><p class="sk2">조치</p><ul class="chips"><li>Suitability 문항에 따른 PENDING / APPROVED 분기</li><li>Egnyte 승인 거절 시 Appeal Letter 흐름</li><li>버전 이력으로 결정 기록</li></ul></div></details>
-  </div>
-</section>
-
-<section class="sec wrap" id="stack">
-  <div class="sec-head">
-    <p class="eyebrow">Stack</p>
-    <h2 class="h2 split">손에 익은 도구들</h2>
-    <p class="sub">주력으로 쓴 도구를 먼저, 써 본 도구는 흐리게 표시했습니다.</p>
-  </div>
-  <div class="stk">
-    <div class="stk-row"><h3>주력</h3><div><span class="chip pri">Java</span><span class="chip pri">Spring Boot 3</span><span class="chip pri">MySQL 8</span><span class="chip pri">JPA · QueryDSL</span><span class="chip pri">Kafka</span><span class="chip pri">AWS</span><span class="chip pri">Docker</span></div></div>
-    <div class="stk-row"><h3>Backend</h3><div><span class="chip">Spring MVC</span><span class="chip">Spring Security</span><span class="chip">OAuth2 · JWT · OTP</span><span class="chip">Netty</span><span class="chip">MyBatis</span><span class="chip lt">Go · Echo · Xorm</span></div></div>
-    <div class="stk-row"><h3>Data</h3><div><span class="chip">Redis</span><span class="chip">Flyway</span><span class="chip">AS400 · DB2 for i</span><span class="chip">MSSQL</span><span class="chip lt">Oracle</span></div></div>
-    <div class="stk-row"><h3>Messaging · Cloud</h3><div><span class="chip">SQS · DLQ</span><span class="chip">ECS · RDS · S3</span><span class="chip">ElastiCache</span><span class="chip">Cognito · API Gateway</span><span class="chip">Lambda</span><span class="chip lt">NCP</span><span class="chip lt">Linux</span></div></div>
-    <div class="stk-row"><h3>Test · CI · 운영</h3><div><span class="chip">JUnit · Mockito</span><span class="chip">MockMvc · REST Docs</span><span class="chip">Testcontainers</span><span class="chip">GitHub Actions</span><span class="chip">Jenkins</span><span class="chip">Grafana · Slack 알람</span></div></div>
-    <div class="stk-row"><h3>Frontend</h3><div><span class="chip lt">React</span><span class="chip lt">JavaScript</span></div></div>
-  </div>
-</section>
-
-<section class="contact" id="contact">
-  <div class="wrap">
-    <p class="eyebrow"><i class="lamp"></i>Contact</p>
-    <p class="big-mail" id="mail">vcxz2464@gmail.com</p>
-    <div class="contact-row">
-      <button class="btn mag" id="copy" type="button">메일 주소 복사</button>
-      <a class="btn ghost mag" href="https://github.com/vcxz2392" target="_blank" rel="noopener">GitHub <span class="arr">↗</span></a>
-      <span class="copied" id="copied" aria-live="polite"></span>
+    <h2 class="h2">그 밖에 한 일</h2>
+    <div class="more">
+      <div class="mi">
+        <h3>고객사 기간계 연동 일 배치 (AS400 · MSSQL)</h3><p class="when">디라이트 파트너 · 2025.06 ~</p>
+        <p><span class="k">문제</span>고객사가 API를 열 수 없어 생산계획 · 비가동 · 보전 · 불량 데이터 수집 불가</p>
+        <p><span class="k">조치</span>read-only 계정 · 별도 커넥션, 4종 일 배치, 유형 마스터로 재분류. 데이터 성격에 따라 멱등 적재(중복 skip)와 이력 보존형 갱신(is_latest) 구분</p>
+        <p><span class="k r">결과</span>운영계에 쓰기 없이 매일 동기화, 설비 실적과 기간계 계획 · 보전 이력을 같은 기준으로 대조</p>
+      </div>
+      <div class="mi">
+        <h3>SaaS 전환 정부지원사업 기술 리딩</h3><p class="when">디라이트 파트너 · 2025.03 ~ 2026.02</p>
+        <p><span class="k">문제</span>고객사마다 서버를 설치하던 구조의 SaaS 전환, PM 부재</p>
+        <p><span class="k">조치</span>일정 · 외부 업체 협의 · 기술 결정 담당, 고객사별 물리 DB 격리, 설치형 배포 Docker화</p>
+        <p><span class="k r">결과</span>TTA · KACI 클라우드 서비스 시험 통과로 사업 요건 충족</p>
+      </div>
+      <div class="mi">
+        <h3>서버 기동 시간 단축 3분 → 7초</h3><p class="when">디라이트 파트너 · 2025</p>
+        <p><span class="k">문제</span>네이티브 쿼리가 JPQL로 인식돼 기동 시 전량 파싱 · 검증, 불필요한 빈 로딩까지 겹쳐 기동에 약 3분</p>
+        <p><span class="k">조치</span>해당 쿼리를 Repository 구현체와 JPA Method로 교체, 불필요한 빈 로딩 · 의존성 정리</p>
+        <p><span class="k r">결과</span>기동 3분 → 7초</p>
+      </div>
+      <div class="mi">
+        <h3>규제 대응 JWT 즉시 차단</h3><p class="when">일루미나리안 · 2023.04</p>
+        <p><span class="k">문제</span>운영자가 사용자를 차단해도 발급된 JWT는 만료 전까지 유효</p>
+        <p><span class="k">조치</span>차단 대상 jti만 Redis에 저장, TTL을 토큰 만료 시각에 맞춤</p>
+        <p><span class="k r">결과</span>차단 직후 요청부터 인증 거부(즉시 로그아웃), 전체 세션을 저장하지 않고 컴플라이언스 요구 충족</p>
+      </div>
+      <div class="mi">
+        <h3>감사 로그 구조 재설계</h3><p class="when">일루미나리안 · 2022.08 ~ 2023.03</p>
+        <p><span class="k">문제</span>엔티티마다 _history 테이블이 늘고, 한 요청에서 함께 바뀐 것을 추적 불가</p>
+        <p><span class="k">조치</span>커스텀 EntityListener로 단일 audit_log, 요청마다 RequestId 발급</p>
+        <p><span class="k r">결과</span>운영팀이 한 요청의 변경 이력을 한 번에 조회</p>
+      </div>
+      <div class="mi">
+        <h3>스키마 버전 관리 통일 (Flyway)</h3><p class="when">일루미나리안 · 2023.01 ~</p>
+        <p><span class="k">문제</span>ddl-auto=update와 수동 DDL이 섞여 QA 배포마다 테이블이 어긋남</p>
+        <p><span class="k">조치</span>ddl-auto=none, 모든 변경을 Flyway로, Testcontainers로 매핑 검증</p>
+        <p><span class="k r">결과</span>이후 QA · Stage · Production 간 스키마 불일치가 다시 생기지 않음</p>
+      </div>
+      <div class="mi">
+        <h3>조회 API 읽기 DB 분리</h3><p class="when">일루미나리안 · 2024</p>
+        <p><span class="k">문제</span>여러 팀 · 서비스가 같은 DB에 붙어 커넥션이 몰림</p>
+        <p><span class="k r">결과</span>MySQL 복제 읽기 · 쓰기 분리, 조회 API를 읽기 DB로 옮겨 쓰기 DB 커넥션 여유 확보</p>
+      </div>
+      <div class="mi">
+        <h3>파일 업로드 구조 전환</h3><p class="when">일루미나리안</p>
+        <p><span class="k">문제</span>모바일 다중 업로드가 API Gateway 10MB 제한 · WAF 룰에 막힘</p>
+        <p><span class="k r">결과</span>Cognito 인증 + S3 직접 업로드로 전송 부하를 백엔드에서 빼고 업로드 실패 해소</p>
+      </div>
     </div>
-    <div class="foot"><span>© 2026 이강일</span></div>
+
+    <details class="more-x web-only">
+      <summary>사례 7개 더 보기</summary>
+      <div class="more">
+        <div class="mi">
+          <h3>소셜 로그인 도입과 기존 OTP 흐름 연결</h3><p class="when">일루미나리안 · 2024.03</p>
+          <p><span class="k">문제</span>기존 필수 OTP 인증 흐름을 깨지 않고 소셜 로그인을 붙여야 했음</p>
+          <p><span class="k">조치</span>Spring OAuth2 Client 직접 구현(Google · Facebook), 같은 이메일 계정 연결, 도입 전 CVE 5건 영향 검토</p>
+          <p><span class="k r">결과</span>2024년 일반 가입 약 5,000명, 소셜 가입 약 24,000명(같은 기간 마케팅 캠페인이 있어 단독 효과로 보지 않음)</p>
+        </div>
+        <div class="mi">
+          <h3>취약성 검사 · 모의해킹 결과 대응</h3><p class="when">일루미나리안 · 2024.03 ~ 04</p>
+          <p><span class="k">문제</span>로그아웃 후 세션 유지, 로그인 무제한 시도, 라이브러리 취약점 지적</p>
+          <p><span class="k">조치</span>로그아웃 API, 7회 실패 시 30분 잠금 · reCAPTCHA, 비밀번호 리셋 링크 10분</p>
+          <p><span class="k r">결과</span>oauth2-client 취약점 대응과 Spring Boot 업그레이드 후 v1.12.0 배포</p>
+        </div>
+        <div class="mi">
+          <h3>신용카드 투자 결제 연동 (North Capital + Stripe)</h3><p class="when">일루미나리안 · 2023 4분기</p>
+          <p><span class="k">문제</span>이전 결제 대행사에서 카드 수수료 23%가 부과되는 사고가 있었음</p>
+          <p><span class="k">조치</span>계정당 카드 1장, 수수료 부담 주체 설정, 진행 중 투자가 있으면 카드 수정 잠금</p>
+          <p><span class="k r">결과</span>1회 $5,000(수수료 포함 최대 $5,350) 한도로 카드 투자 오픈</p>
+        </div>
+        <div class="mi">
+          <h3>배치 서비스 AWS Lambda 이전</h3><p class="when">일루미나리안 · 2023.08 ~ 09</p>
+          <p><span class="k">문제</span>배지 · 한도 알림 · 취소 기한 · 입금 리마인더 등 배치 약 17종을 별도 서비스로 운영</p>
+          <p><span class="k">조치</span>EventBridge 스케줄, 로직은 백엔드 /api/batch/*, 미국 공휴일 갱신</p>
+          <p><span class="k r">결과</span>이전 완료, 미국 PT 기준 스케줄과 공휴일을 반영한 영업일 계산</p>
+        </div>
+        <div class="mi">
+          <h3>N/O · A/O 이중 코드베이스 통합</h3><p class="when">일루미나리안 · 2024.11</p>
+          <p><span class="k">문제</span>라이브 버전을 동결한 채 신규 버전을 따로 개발해 코드가 두 갈래</p>
+          <p><span class="k">조치</span>A/O · 공통 · N/O 컴포넌트로 변경 추적, 배포 체크리스트</p>
+          <p><span class="k r">결과</span>v2.0.0 통합 버전 PROD 배포</p>
+        </div>
+        <div class="mi">
+          <h3>User Service 설계 문서</h3><p class="when">일루미나리안 · 2021.12 ~ 2023.08</p>
+          <p><span class="k">문제</span>기획 단계라 회원 · 계정 도메인의 상태와 흐름이 정해지지 않은 상태</p>
+          <p><span class="k">조치</span>합류 첫 달에 v1~v8, 이후 v10까지 단독 작성, 버전 이력으로 결정 기록</p>
+          <p><span class="k r">결과</span>회원 도메인 설계 기준 문서</p>
+        </div>
+        <div class="mi">
+          <h3>사내 헬프데스크 단독 구축</h3><p class="when">디라이트 파트너 · 2026.05 ~</p>
+          <p><span class="k">문제</span>사내 요청 · 고객사 문의 창구가 흩어져 있던 상태</p>
+          <p><span class="k">조치</span>기획 · 도메인 설계 · 컨벤션 문서 먼저, 티켓 상태 전이 · 권한을 코드 제약으로, Flyway · REST Docs 테스트</p>
+          <p><span class="k r">결과</span>소통 창구를 하나로 합쳐 운영 중 (Java 21 · Spring Boot · React · TypeScript)</p>
+        </div>
+      </div>
+    </details>
+
+    <p class="kick" style="margin-top:20px">Stack</p>
+    <dl class="stack" style="margin-top:0">
+      <dt>주력</dt><dd class="pri">Java · Spring Boot 3 · MySQL 8 · JPA / QueryDSL · Kafka · AWS · Docker</dd>
+      <dt>Backend</dt><dd>Spring MVC · Spring Security · OAuth2 · JWT · Netty · MyBatis · Go (Echo · Xorm)</dd>
+      <dt>Data</dt><dd>Redis · Flyway · AS400 / DB2 for i · MSSQL · Oracle</dd>
+      <dt>Cloud</dt><dd>SQS · DLQ · ECS · RDS · S3 · ElastiCache · Cognito · Lambda · NCP · Linux</dd>
+      <dt>Test · CI</dt><dd>JUnit · Mockito · MockMvc · REST Docs · Testcontainers · GitHub Actions · Jenkins · Grafana</dd>
+    </dl>
   </div>
+  <footer class="foot"><span>이강일 · BACKEND PORTFOLIO</span><span><b>08</b> / 09</span></footer>
 </section>
+
+<!-- ============ 마무리 ============ -->
+<section class="page cover" id="contact">
+  <div class="page-body" style="justify-content:center">
+    <p class="eyebrow"><span class="lamp"></span>Contact</p>
+    <p class="pitch" style="margin-top:18px">협업과 책임감, 자동화를 통해 좋은 제품을 만들어가는 백엔드 개발자</p>
+    <h2 class="name" style="font-size:clamp(2.8rem,8vw,3.84rem)">이강일</h2>
+    <p class="lede" style="max-width:36em">데이터가 끊기지 않는 구조를 먼저 만들고, 느리거나 숫자가 맞지 않으면 API에서 쿼리, 원본 데이터까지 거슬러 올라가 원인을 확인한 뒤 고칩니다. 팀이 같은 기준으로 일할 수 있게 규칙과 도구를 함께 만드는 일도 계속하고 있습니다.</p>
+    <dl class="facts" style="max-width:34rem">
+      <dt class="apply-only">TEL</dt><dd class="mono apply-only">010-2464-2392</dd>
+      <dt>MAIL</dt><dd class="mono"><a href="mailto:vcxz2464@gmail.com" id="mail">vcxz2464@gmail.com</a></dd>
+      <dt>WEB</dt><dd class="mono"><a href="https://vcxz2392.github.io">vcxz2392.github.io</a></dd>
+      <dt>GITHUB</dt><dd class="mono"><a href="https://github.com/vcxz2392" target="_blank" rel="noopener">github.com/vcxz2392</a></dd>
+    </dl>
+    <p class="web-only"><button class="copy-btn" id="copy" type="button">메일 주소 복사</button><span class="copied" id="copied" aria-live="polite"></span></p>
+    <p class="note" style="margin-top:14px">© 2026 이강일</p>
+  </div>
+  <footer class="foot"><span>이강일 · BACKEND PORTFOLIO</span><span><b>09</b> / 09</span></footer>
+</section>
+
 </main>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script>
-(() => {
-  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const fine = matchMedia('(pointer: fine)').matches;
-  const G = window.gsap, ST = window.ScrollTrigger;
-  if (G && ST) G.registerPlugin(ST);
-  const $ = (s, r = document) => r.querySelector(s);
-  const $$ = (s, r = document) => [...r.querySelectorAll(s)];
-  const css = n => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
-  const rand = (a, b) => a + Math.random() * (b - a);
-  const pad = (n, l = 2) => String(n).padStart(l, '0');
-
-  /* anchor scroll */
-  $$('a[href^="#"]').forEach(a => a.addEventListener('click', e => {
-    const id = a.getAttribute('href');
-    const t = id === '#top' ? 0 : $(id);
-    if (t === null) return;
-    e.preventDefault();
-    window.scrollTo({ top: t === 0 ? 0 : t.getBoundingClientRect().top + scrollY - 56, behavior: reduce ? 'auto' : 'smooth' });
-  }));
-
-  /* progress + active nav */
-  const bar = $('.progress span');
-  const navLinks = $$('.nav nav a');
-  const onScroll = () => {
-    const h = document.documentElement.scrollHeight - innerHeight;
-    bar.style.transform = `scaleX(${h > 0 ? scrollY / h : 0})`;
-  };
-  addEventListener('scroll', onScroll, { passive: true }); onScroll();
-  const secIO = new IntersectionObserver(es => es.forEach(en => {
-    const id = en.target.id;
-    if (en.isIntersecting) navLinks.forEach(a => a.classList.toggle('on', a.getAttribute('href') === '#' + id));
-  }), { rootMargin: '-45% 0px -50% 0px' });
-  ['summary', 'impact', 'career', 'archive', 'stack', 'contact'].forEach(id => $('#' + id) && secIO.observe($('#' + id)));
-
-  /* split helpers */
-  const splitChars = (el, cls) => {
-    const txt = el.textContent; el.textContent = '';
-    return [...txt].map(c => { const s = document.createElement('span'); s.className = cls; s.textContent = c; s.setAttribute('aria-hidden', 'true'); el.appendChild(s); return s; });
-  };
-
-  /* hero: name + kinetic type */
-  const nameEl = $('#name');
-  const nameChars = (() => {
-    const txt = nameEl.textContent; nameEl.textContent = '';
-    return [...txt].map(c => { const m = document.createElement('span'); m.className = 'm'; const s = document.createElement('span'); s.className = 'ch'; s.textContent = c; m.appendChild(s); m.setAttribute('aria-hidden', 'true'); nameEl.appendChild(m); return s; });
-  })();
-  if (G && !reduce) {
-    G.from(nameChars, { yPercent: 110, duration: 1.1, ease: 'expo.out', stagger: .08, delay: .15 });
-    G.from('#pitch', { y: 28, opacity: 0, duration: 1.1, ease: 'expo.out' });
-    G.from('.hero .lede, .hero .cta, .facts', { y: 24, opacity: 0, duration: 1, ease: 'power3.out', stagger: .1, delay: .35 });
-  }
-
-  /* hero stream (three.js) */
-  (() => {
-    const cv = $('#stream');
-    if (!window.THREE || !cv) return;
-    let renderer;
-    try { renderer = new THREE.WebGLRenderer({ canvas: cv, alpha: true, antialias: true }); } catch (e) { return; }
-    renderer.setPixelRatio(Math.min(devicePixelRatio || 1, 2));
-    const scene = new THREE.Scene();
-    const cam = new THREE.PerspectiveCamera(50, 1, .1, 100); cam.position.z = 6;
-    const N = innerWidth < 700 ? 700 : 1600;
-    const pos = new Float32Array(N * 3), col = new Float32Array(N * 3);
-    const P = Array.from({ length: N }, () => ({ t: Math.random(), sy: rand(-1, 1), sz: rand(-1, 1), lane: (Math.random() * 3) | 0, sp: rand(.03, .06), ph: rand(0, 6.28), bad: Math.random() < .025, dy: 0 }));
-    const geo = new THREE.BufferGeometry();
-    geo.setAttribute('position', new THREE.BufferAttribute(pos, 3));
-    geo.setAttribute('color', new THREE.BufferAttribute(col, 3));
-    const c = document.createElement('canvas'); c.width = c.height = 64;
-    const x2 = c.getContext('2d'); const gr = x2.createRadialGradient(32, 32, 0, 32, 32, 32);
-    gr.addColorStop(0, 'rgba(255,255,255,1)'); gr.addColorStop(.45, 'rgba(255,255,255,.9)'); gr.addColorStop(1, 'rgba(255,255,255,0)');
-    x2.fillStyle = gr; x2.fillRect(0, 0, 64, 64);
-    const mat = new THREE.PointsMaterial({ size: .06, map: new THREE.CanvasTexture(c), vertexColors: true, transparent: true, depthWrite: false });
-    scene.add(new THREE.Points(geo, mat));
-    let C = {};
-    const readColors = () => {
-      const bg = new THREE.Color(css('--bg'));
-      const dark = bg.r + bg.g + bg.b < 1.2;
-      mat.blending = dark ? THREE.AdditiveBlending : THREE.NormalBlending; mat.needsUpdate = true;
-      C = { a: new THREE.Color(css('--accent')), r: new THREE.Color(css('--run')), s: new THREE.Color(css('--stop')), m: new THREE.Color(css('--muted')), i: new THREE.Color(css('--ink')) };
-    };
-    readColors();
-    matchMedia('(prefers-color-scheme: dark)').addEventListener('change', readColors);
-    new MutationObserver(readColors).observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
-    let vw = 1, vh = 1;
-    const size = () => {
-      const w = cv.clientWidth, h = cv.clientHeight; if (!w || !h) return;
-      renderer.setSize(w, h, false); cam.aspect = w / h; cam.updateProjectionMatrix();
-      vh = 2 * Math.tan(25 * Math.PI / 180) * 6; vw = vh * cam.aspect;
-    };
-    size(); addEventListener('resize', size);
-    let mx = 0, my = 0, mwx = 99, mwy = 99;
-    $('.hero').addEventListener('pointermove', e => {
-      const r = cv.getBoundingClientRect();
-      mx = (e.clientX - r.left) / r.width * 2 - 1; my = -((e.clientY - r.top) / r.height * 2 - 1);
-      mwx = mx * vw / 2; mwy = my * vh / 2;
-    });
-    $('.hero').addEventListener('pointerleave', () => { mwx = mwy = 99; mx = my = 0; });
-    const ease = k => k < .5 ? 4 * k * k * k : 1 - Math.pow(-2 * k + 2, 3) / 2;
-    const tmp = new THREE.Color();
-    const step = (dt, time) => {
-      for (let i = 0; i < N; i++) {
-        const p = P[i];
-        p.t += p.sp * dt;
-        if (p.t > 1) { p.t -= 1; p.sy = rand(-1, 1); p.lane = (Math.random() * 3) | 0; p.bad = Math.random() < .025; }
-        const t = p.t;
-        const x = vw * (-.65 + 1.3 * t);
-        let y, z, ccol, mix;
-        if (t < .42) { const k = ease(t / .42); y = p.sy * vh * .48 * (1 - k) + Math.sin(time * 1.4 + p.ph + t * 12) * .06 * (1 - k); z = p.sz * 1.2 * (1 - k); ccol = C.m; mix = k; }
-        else if (t < .62) { y = p.sy * .07 + Math.sin(time * 3 + p.ph) * .015; z = p.sz * .1; ccol = C.a; mix = 1; }
-        else { const k = ease((t - .62) / .38); y = p.sy * .07 * (1 - k) + (p.lane - 1) * vh * .17 * k; z = p.sz * .1 + p.sz * .5 * k; ccol = p.lane === 0 ? C.r : p.lane === 1 ? C.a : C.i; mix = 1; }
-        const dx = x - mwx, dyy = y - mwy, d2 = dx * dx + dyy * dyy;
-        const push = d2 < .45 ? (1 - d2 / .45) * .5 * Math.sign(dyy || 1) : 0;
-        p.dy += (push - p.dy) * .12;
-        pos[i * 3] = x; pos[i * 3 + 1] = y + p.dy; pos[i * 3 + 2] = z;
-        if (p.bad && t > .5) tmp.copy(C.s); else tmp.copy(C.m).lerp(ccol, mix);
-        col[i * 3] = tmp.r; col[i * 3 + 1] = tmp.g; col[i * 3 + 2] = tmp.b;
-      }
-      geo.attributes.position.needsUpdate = true; geo.attributes.color.needsUpdate = true;
-      cam.position.x += (mx * .35 - cam.position.x) * .04; cam.position.y += (my * .25 - cam.position.y) * .04; cam.lookAt(0, 0, 0);
-      renderer.render(scene, cam);
-    };
-    step(0, 0);
-    if (reduce) return;
-    let vis = true, last = performance.now(), raf = 0;
-    const loop = now => { const dt = Math.min((now - last) / 1000, .05); last = now; step(dt, now / 1000); raf = vis ? requestAnimationFrame(loop) : 0; };
-    new IntersectionObserver(([e]) => { vis = e.isIntersecting; if (vis && !raf) { last = performance.now(); raf = requestAnimationFrame(loop); } }).observe(cv);
-  })();
-
-  /* headings split reveal */
-  if (G && ST && !reduce) {
-    $$('.h2.split').forEach(h => {
-      const words = h.textContent.trim().split(/\s+/); h.setAttribute('aria-label', h.textContent.trim()); h.textContent = '';
-      const inner = words.map((w, i) => { const o = document.createElement('span'); o.className = 'w'; o.setAttribute('aria-hidden', 'true'); const s = document.createElement('span'); s.textContent = w; o.appendChild(s); h.appendChild(o); if (i < words.length - 1) h.appendChild(document.createTextNode(' ')); return s; });
-      G.from(inner, { yPercent: 110, rotate: 4, duration: 1, ease: 'expo.out', stagger: .06, scrollTrigger: { trigger: h, start: 'top 92%' } });
-    });
-    $$('[data-reveal]').forEach(el => G.from(el, { y: 40, opacity: .2, duration: 1, ease: 'power3.out', scrollTrigger: { trigger: el, start: 'top 92%' } }));
-  }
-
-  /* impact bars: collapse from 100% to ratio */
-  if (G && ST && !reduce) {
-    $$('.row').forEach(row => {
-      const fill = $('.fill', row), val = $('.val b', row), r = +row.dataset.ratio;
-      const tl = G.timeline({ scrollTrigger: { trigger: row, start: 'top 85%' } });
-      tl.fromTo(fill, { width: '100%', backgroundColor: 'var(--stop)' }, { width: (r * 100) + '%', backgroundColor: 'var(--accent)', duration: 1.6, ease: 'expo.inOut' })
-        .from(val, { yPercent: 60, opacity: 0, duration: .6, ease: 'power3.out' }, '-=.6');
-    });
-    $$('.spans .sb i').forEach(i => G.from(i, { scaleX: 0, transformOrigin: '0 50%', duration: 1.2, ease: 'expo.out', scrollTrigger: { trigger: i, start: 'top 90%' } }));
-  }
-
-  /* pipeline simulation */
-  (() => {
-    const svg = $('#pipe'); const NS = 'http://www.w3.org/2000/svg';
-    const el = (tag, attrs, parent = svg) => { const e = document.createElementNS(NS, tag); for (const k in attrs) e.setAttribute(k, attrs[k]); parent.appendChild(e); return e; };
-    const node = (x, y, w, h, t, s, g) => { const gg = el('g', { class: 'node', 'data-g': g }); el('rect', { x, y, width: w, height: h, rx: 10 }, gg); el('text', { x: x + 14, y: y + 26, class: 't' }, gg).textContent = t; if (s) el('text', { x: x + 14, y: y + 46, class: 's' }, gg).textContent = s; return gg; };
-    const edges = el('g', {});
-    const line = (pts, cls, g) => el('polyline', { points: pts.map(p => p.join(',')).join(' '), class: cls, 'data-g': g }, edges);
-    const EQ = [0, 1, 2].map(i => ({ y: 70 + i * 120 }));
-    const laneY = [170, 220, 270];
-    // edges
-    EQ.forEach(e => line([[120, e.y + 28], [170, 220]], 'edge', '1'));
-    laneY.forEach(y => line([[310, 220], [380, y]], 'edge', '1 2'));
-    laneY.forEach(y => line([[380, y], [530, y]], 'lane', '2'));
-    laneY.forEach(y => line([[530, y], [600, 220]], 'edge', '1 2'));
-    line([[740, 205], [800, 162]], 'edge', '1 2');
-    line([[740, 235], [800, 312]], 'edge', '3');
-    line([[870, 130], [870, 84]], 'edge', '1');
-    const retryPath = el('path', { d: 'M870 344 C870 420 670 420 670 265', class: 'edge retry', 'data-g': '3' }, edges);
-    // nodes
-    EQ.forEach((e, i) => node(16, e.y, 104, 56, `설비 ${'ABC'[i]}`, 'TCP', '1'));
-    node(170, 175, 140, 90, '입수 서비스', 'Netty → Producer', '1');
-    const kg = el('g', { class: 'node', 'data-g': '2' }); el('rect', { x: 360, y: 120, width: 190, height: 200, rx: 10 }, kg);
-    el('text', { x: 374, y: 146, class: 't' }, kg).textContent = 'Kafka';
-    svg.insertBefore(kg, edges); // lanes drawn above box
-    const offEls = laneY.map((y, i) => { const t = el('text', { x: 540, y: y - 8, class: 'off', 'text-anchor': 'end', 'data-g': '2' }); t.textContent = `p${i} #0`; return t; });
-    node(600, 175, 140, 90, '처리 서비스', 'Consumer → JPA', '1 2');
-    node(800, 20, 140, 64, '웹 서비스', '조회 · 집계 API', '1');
-    node(800, 130, 140, 64, 'MySQL', '저장 · 집계', '1 2');
-    node(800, 280, 140, 64, '원본 메시지', 'JSON · offset', '3');
-    const lblR = el('text', { x: 770, y: 414, class: 'lbl r', 'text-anchor': 'middle', 'data-g': '3' }); lblR.textContent = '재처리 API';
-    const badge = el('g', { class: 'badge', 'data-g': '2' }); const bRect = el('rect', { x: 610, y: 278, width: 120, height: 24, rx: 12 }, badge);
-    const bText = el('text', { x: 670, y: 294, 'text-anchor': 'middle' }, badge); bText.textContent = 'IDLE';
-    const msgs = el('g', {});
-    // retry sample points
-    const RL = retryPath.getTotalLength(); const retryPts = Array.from({ length: 24 }, (_, i) => { const p = retryPath.getPointAtLength(RL * i / 23); return [p.x, p.y]; });
-    retryPts.push([670, 220]);
-
-    const cOk = $('#cOk'), cNg = $('#cNg'), cRe = $('#cRe'), plog = $('#plog');
-    let nOk = 0, nNg = 0, nRe = 0; const offs = [1832, 1790, 1856];
-    offEls.forEach((t, i) => t.textContent = `p${i} #${offs[i]}`);
-    const logs = [];
-    const log = (h) => { logs.push(h); if (logs.length > 3) logs.shift(); plog.innerHTML = logs.join('<br>'); };
-    const setBadge = (txt, color) => { bText.textContent = txt; bText.style.fill = color; bRect.style.stroke = color; };
-
-    const live = [];
-    const mk = (cls, r = 6) => el('circle', { r, class: 'msg ' + cls, cx: -20, cy: -20 }, msgs);
-    const go = (m, pts, speed, done) => {
-      const L = [0]; for (let i = 1; i < pts.length; i++) L.push(L[i - 1] + Math.hypot(pts[i][0] - pts[i - 1][0], pts[i][1] - pts[i - 1][1]));
-      Object.assign(m, { pts, L, d: 0, speed, done, wait: 0 });
-    };
-    const place = m => {
-      const { pts, L } = m; let i = 1; while (i < L.length - 1 && L[i] < m.d) i++;
-      const seg = L[i] - L[i - 1] || 1, k = Math.min(Math.max((m.d - L[i - 1]) / seg, 0), 1);
-      m.c.setAttribute('cx', pts[i - 1][0] + (pts[i][0] - pts[i - 1][0]) * k); m.c.setAttribute('cy', pts[i - 1][1] + (pts[i][1] - pts[i - 1][1]) * k);
-    };
-    const kill = m => { m.dead = true; m.c.remove(); };
-    const req = () => Math.random().toString(16).slice(2, 6);
-    const spawn = () => {
-      const e = (Math.random() * 3) | 0, p = (Math.random() * 3) | 0, id = req();
-      const m = { c: mk(''), p, id };
-      go(m, [[120, EQ[e].y + 28], [170, 220], [310, 220], [380, laneY[p]], [530, laneY[p]], [600, 220], [640, 220]], rand(170, 220), () => {
-        offs[p]++; offEls[p].textContent = `p${p} #${offs[p]}`;
-        m.wait = .35; setBadge('CONSUMING', css('--muted'));
-        m.after = () => {
-          setBadge('PROCESSING', css('--accent'));
-          m.wait = .35;
-          m.after = () => {
-            const raw = { c: mk('raw', 4) }; go(raw, [[740, 235], [810, 312]], 200, () => kill(raw)); live.push(raw);
-            if (Math.random() < .14) {
-              nNg++; cNg.textContent = nNg; m.c.setAttribute('class', 'msg ng'); setBadge('FAILED', css('--stop'));
-              log(`p${p}#${offs[p]} req·${id}  CONSUMING → PROCESSING → <span class="ng">FAILED</span>`);
-              go(m, [[740, 235], [835 + rand(0, 70), 318 + rand(0, 16)]], 160, () => {
-                m.wait = 1.6; m.after = () => {
-                  m.c.setAttribute('class', 'msg'); nRe++; cRe.textContent = nRe;
-                  log(`p${p}#${offs[p]} req·${id}  <span class="re">재처리 API</span> → 원본 메시지로 다시 처리`);
-                  go(m, [[870, 344], ...retryPts], 230, () => ok(m, p, id, true));
-                };
-              });
-            } else ok(m, p, id, false);
-          };
-        };
-      });
-      live.push(m);
-    };
-    const ok = (m, p, id, retried) => {
-      nOk++; cOk.textContent = nOk; m.c.setAttribute('class', 'msg ok'); setBadge('SUCCESS', css('--run'));
-      if (!retried) log(`p${p}#${offs[p]} req·${id}  CONSUMING → PROCESSING → <span class="ok">SUCCESS</span>`);
-      go(m, [[740, 205], [815, 162]], 220, () => kill(m));
-    };
-    const update = dt => {
-      for (const m of live) {
-        if (m.dead) continue;
-        if (m.wait > 0) { m.wait -= dt; if (m.wait <= 0 && m.after) { const f = m.after; m.after = null; f(); } continue; }
-        m.d += m.speed * dt; place(m);
-        if (m.d >= m.L[m.L.length - 1]) { const f = m.done; m.done = null; if (f) f(); }
-      }
-      for (let i = live.length - 1; i >= 0; i--) if (live[i].dead) live.splice(i, 1);
-    };
-    // steps focus
-    const steps = $$('.step');
-    const setFocus = n => { svg.dataset.focus = n; steps.forEach(s => s.classList.toggle('on', s.dataset.step === String(n))); };
-    new IntersectionObserver(es => es.forEach(en => { if (en.isIntersecting) setFocus(en.target.dataset.step); }), { rootMargin: '-45% 0px -45% 0px' }).observe(steps[0]);
-    steps.slice(1).forEach(s => new IntersectionObserver(es => es.forEach(en => { if (en.isIntersecting) setFocus(en.target.dataset.step); }), { rootMargin: '-45% 0px -45% 0px' }).observe(s));
-
-    if (reduce) {
-      [[240, 220], [455, 170], [420, 270], [670, 220]].forEach(([x, y]) => el('circle', { r: 6, class: 'msg', cx: x, cy: y }, msgs));
-      log('p1#1791 req·3fa2  CONSUMING → PROCESSING → <span class="ok">SUCCESS</span>');
-      return;
-    }
-    let vis = false, last = 0, acc = 0, raf = 0;
-    const loop = now => {
-      const dt = Math.min((now - last) / 1000, .05); last = now;
-      acc += dt; if (acc > .55) { acc = 0; spawn(); }
-      update(dt);
-      raf = vis ? requestAnimationFrame(loop) : 0;
-    };
-    new IntersectionObserver(([e]) => { vis = e.isIntersecting; if (vis && !raf) { last = performance.now(); raf = requestAnimationFrame(loop); } }).observe(svg);
-  })();
-
-  /* work cards reveal */
-  if (G && ST && !reduce) $$('#career .card').forEach(c => G.from(c, { y: 40, opacity: .2, duration: 1, ease: 'power3.out', scrollTrigger: { trigger: c, start: 'top 92%' } }));
-
-  /* contact: copy */
-  const mail = $('#mail'); const addr = mail.textContent;
-  $('#copy').addEventListener('click', () => {
-    const ok = () => { $('#copied').textContent = '복사됨'; setTimeout(() => $('#copied').textContent = '', 2000); };
-    const fallback = () => { const r = document.createRange(); r.selectNodeContents(mail); const s = getSelection(); s.removeAllRanges(); s.addRange(r); $('#copied').textContent = '선택됨, ⌘C로 복사'; };
-    try { navigator.clipboard.writeText(addr).then(ok, fallback); } catch (e) { fallback(); }
-  });
-
-  if (ST) {
-    addEventListener('load', () => ST.refresh());
-    document.addEventListener('toggle', () => ST.refresh(), true);
-  }
-})();
+document.getElementById('copy').addEventListener('click', async () => {
+  const out = document.getElementById('copied');
+  try { await navigator.clipboard.writeText('vcxz2464@gmail.com'); out.textContent = '복사했습니다'; }
+  catch (e) { out.textContent = 'vcxz2464@gmail.com'; }
+  setTimeout(() => { out.textContent = ''; }, 2400);
+});
 </script>
 </body>
 </html>
