@@ -55,7 +55,7 @@ html.apply .apply-only{display:revert}
 .nav nav a{text-decoration:none;color:var(--muted)}
 .nav nav a:hover{color:var(--ink)}
 .nav .pdf{font-family:var(--f-mono);font-size:12px;color:var(--ink);border:1px solid var(--line);border-radius:999px;padding:4px 12px}
-@media (max-width:640px){.nav nav a.opt{display:none}}
+@media screen and (max-width:640px){.nav nav a.opt{display:none}}
 
 /* ---------- page frame (화면) ---------- */
 .page{max-width:960px;margin:0 auto;padding:72px 24px;position:relative;border-bottom:1px solid var(--line-soft)}
@@ -170,6 +170,8 @@ html.apply .apply-only{display:revert}
 .s-t{fill:var(--ink)} .s-m{fill:var(--muted)} .s-acc{fill:var(--accent)} .s-ng{fill:var(--stop)}
 .s-ln{stroke:var(--muted);fill:none} .s-lnacc{stroke:var(--accent);fill:none}
 .s-mk{fill:var(--muted)} .s-mkacc{fill:var(--accent)}
+.fig.xd{background:#fff;padding:10px 10px 8px}
+.fig.xd img{display:block;width:100%;height:auto}
 .fig-m{display:none}
 
 /* team (case 05) */
@@ -204,7 +206,7 @@ html.apply .apply-only{display:revert}
 .copied{font-family:var(--f-mono);font-size:.8rem;color:var(--run);margin-left:10px}
 
 /* ---------- 반응형 ---------- */
-@media (max-width:760px){
+@media screen and (max-width:760px){
   .page{padding:52px 16px}
   .case-head{grid-template-columns:1fr;align-items:start}
   .metric{text-align:left}
@@ -213,7 +215,7 @@ html.apply .apply-only{display:revert}
   .more{grid-template-columns:1fr}
   .h2 br{display:none}
 }
-@media (max-width:640px){
+@media screen and (max-width:640px){
   .bar,.bar.s1,.bar.s2{grid-template-columns:1fr auto;gap:4px 10px}
   .bar .track{grid-column:1 / -1;grid-row:2}
   .bar .val{grid-row:1;grid-column:2}
@@ -255,6 +257,14 @@ html.apply .apply-only{display:revert}
   .facts{margin-top:40px}
   .impact{margin-top:44px}
   .sub{margin-top:16px}
+  .co{padding:.8rem 0}
+  .fig.xd{padding:6px}
+  #case-03 .take{display:none}
+  .fig.xd img[src*="c02_"]{width:84%;margin:0 auto}
+  .fig.xd img[src*="c03_signup"]{width:72%;margin:0 auto}
+  .fig.xd img[src*="c03_alarm"]{width:84%;margin:0 auto}
+  .fig.xd img[src*="c05_"]{width:66%;margin:0 auto}
+  .idx td{padding:.6rem 8px}
 }
 </style>
 </head>
@@ -324,9 +334,9 @@ html.apply .apply-only{display:revert}
           <p class="prod">QGX: 고객사 공장에 서버를 설치하는 제조 현장 모니터링 솔루션 (온프레미스)</p>
           <ul>
             <li>설비 TCP 입수 → Kafka 메시지 처리 → 저장 · 집계 API 구간 백엔드 리드, 레거시 단일 프로세스를 입수 · 처리 서비스로 분리</li>
-            <li>고객사 기간계(AS400 · MSSQL) read-only 일 배치 연동, AI 리포트용 조회 REST API Tool 설계 · 구현</li>
+            <li>API를 열 수 없는 고객사 기간계(AS400 · MSSQL)를 멀티 데이터소스로 read-only 직접 연결해 매일 입수, AI 리포트 조회를 REST API Tool 호출로 바꿔 2분 → 10초</li>
             <li>SaaS 전환 정부지원사업 기술 리딩, TTA · KACI 클라우드 서비스 시험 통과</li>
-            <li>형상관리 도구를 쓰지 않던 팀에 브랜치 · PR · 리뷰 흐름과 Docker 이미지 배포 도입, 사내 헬프데스크 단독 구축</li>
+            <li>형상관리 도구를 쓰지 않던 팀에 브랜치 · PR · 리뷰와 Docker 이미지 배포를 도입해 업체 배포 코드 통일, 고객사 문의 창구는 헬프데스크(단독 구축)로 통합</li>
           </ul>
         </div>
       </div>
@@ -337,8 +347,8 @@ html.apply .apply-only{display:revert}
           <p class="prod">EnergySharesUS: 미국 신재생 에너지 크라우드 펀딩 플랫폼 · EnergySharesJP: 일본판</p>
           <ul>
             <li>기획 단계부터 합류해 회원 · 인증 · 투자 · 결제 · 정산 도메인 백엔드 설계 · 구축과 운영</li>
-            <li>2024.03부터 13명 팀 프로젝트 리드, 백엔드 2명 리드. 리뷰 규칙 제안과 검증 · 배포 단계 분리</li>
-            <li>EnergySharesJP: 회원 · 투자 처리 · 정산 API (Go · Echo)</li>
+            <li>2024.03부터 13명 팀 프로젝트 리드, 백엔드 2명 리드. 리뷰 규칙을 팀과 정하고 검증 · 배포 단계를 나눠 배포 12분 → 4분</li>
+            <li>EnergySharesJP: Go · Echo로 회원 · 투자 처리 · 정산 API를 설계 · 구현해 일본 투자자 대상 서비스로 운영</li>
           </ul>
         </div>
       </div>
@@ -348,7 +358,7 @@ html.apply .apply-only{display:revert}
           <h3>임플릿 <small>팀원</small></h3>
           <p class="prod">케이블 방송사 SI</p>
           <ul>
-            <li>콘텐츠 편성 · 배포 운영자 시스템 백엔드와 관리 UI 개발, 셋톱 수집 · 진단 이력 조회 API</li>
+            <li>편성 단위를 지역 · 가입자 그룹으로 넓혀 운영자가 그룹별로 편성하게 하고, 셋톱 수집 · 진단 이력을 API로 바로 확인하게 함 (편성 · 배포 운영자 시스템 백엔드와 관리 UI)</li>
           </ul>
         </div>
       </div>
@@ -491,24 +501,7 @@ html.apply .apply-only{display:revert}
     </div>
     <p class="lede">투자 한도, 취소 기한, 조건 변경 재동의 같은 규정 요구사항을 사람이 기억하는 대신, 투자와 취소 때마다 코드가 같은 규칙으로 검증하게 만들었습니다.</p>
 
-    <figure class="fig">
-      <div class="flow">
-        <span class="tag-l">흐름</span>
-        <div class="nd">투자 요청</div><div class="ar"></div>
-        <div class="nd key">검증 규칙 12개<small>한도 · 기한 · 수정 제한</small></div><div class="ar"></div>
-        <div class="nd">비관적 락<small>마감 직후 몰리는 구간</small></div><div class="ar"></div>
-        <div class="nd">에스크로 거래<small>North Capital</small></div><div class="ar"></div>
-        <div class="nd ok">웹훅 동기화<small>4종 수신</small></div>
-      </div>
-      <div class="flow">
-        <span class="tag-l">상태</span>
-        <div class="nd">CREATED</div><div class="ar"></div>
-        <div class="nd">FUNDED</div><div class="ar"></div>
-        <div class="nd ok">SETTLED</div><div class="ar"></div>
-        <div class="nd hot">UNWIND<small>환불</small></div>
-      </div>
-      <figcaption>투자 상태를 에스크로 거래 상태와 1:1로 매핑, 조건 변경 재동의는 상태가 아닌 플래그로 분리</figcaption>
-    </figure>
+    <figure class="fig xd"><img src="assets/c02_invest.png" alt="투자 요청 → 검증 규칙 12개 → 비관적 락 → 에스크로 거래 → 웹훅 동기화, 투자 상태 CREATED → FUNDED → SETTLED, 취소 시 UNWIND"></figure>
 
     <dl class="pjar">
       <dt>문제</dt><dd>기획 · 컴플라이언스가 정리한 미국 증권 규정(Reg CF · Reg D · Reg A) 요구사항이 투자 한도 · 취소 기한 · 조건 변경 재동의를 요구하고, 에스크로 · KYC/AML · 문서 보관은 제약이 서로 다른 외부 서비스에 의존</dd>
@@ -553,22 +546,7 @@ html.apply .apply-only{display:revert}
 
     <div class="sub">
       <div class="sub-h"><h3>회원가입 외부 연동 비동기 전환<small>2024.04</small></h3><p class="v">4초 → <b>1초</b></p></div>
-      <div class="fig" style="padding:12px">
-        <div class="flow">
-          <span class="tag-l">전</span>
-          <div class="nd">가입 API</div><div class="ar"></div>
-          <div class="nd hot">KYC</div><div class="ar"></div>
-          <div class="nd hot">이메일</div><div class="ar"></div>
-          <div class="nd hot">서드파티<small>동기 직렬 · 평균 4초</small></div>
-        </div>
-        <div class="flow">
-          <span class="tag-l">후</span>
-          <div class="nd ok">가입 API<small>DB 저장 + 발행 · 1초</small></div><div class="ar"></div>
-          <div class="nd key">SQS</div><div class="ar"></div>
-          <div class="nd">컨슈머<small>외부 연동 처리</small></div><div class="ar"></div>
-          <div class="nd">3회 재시도 → DLQ<small>Slack 실패 알림</small></div>
-        </div>
-      </div>
+      <figure class="fig xd"><img src="assets/c03_signup.png" alt="전: 가입 API가 KYC, 이메일, 서드파티를 동기로 호출. 후: 가입 API → SQS → 컨슈머 → 외부 연동, 3회 실패 시 DLQ와 Slack 알림"></figure>
       <dl class="pjar">
         <dt>문제</dt><dd>외부 KYC · 이메일 · 서드파티 호출이 동기로 이어져 평균 4초, 외부 지연 시 7초 이상. 외부 장애가 곧 회원가입 실패로 노출</dd>
         <dt>판단</dt><dd>가입 시점에 즉시 필요한 건 접수 완료 여부 하나뿐. 브로커는 사내 메일 서비스가 이미 쓰던 SQS를 재사용</dd>
@@ -579,6 +557,7 @@ html.apply .apply-only{display:revert}
 
     <div class="sub">
       <div class="sub-h"><h3>운영 알람 재설계<small>2024.09</small></h3><p class="v"><b>ERROR 로그 기준</b></p></div>
+      <figure class="fig xd"><img src="assets/c03_alarm.png" alt="ERROR 로그 → Grafana 알람 → Slack(RequestId) → 원인 확정과 유니크 키 차단"></figure>
       <dl class="pjar">
         <dt>문제</dt><dd>알람이 Nginx 5xx 기준이라 리다이렉션으로 처리되는 에러는 감지 불가. 소셜 가입 중복 계정 에러로 약 400명이 로그인하지 못하는 동안에도 알람이 울리지 않음</dd>
         <dt>조치</dt>
@@ -613,23 +592,7 @@ html.apply .apply-only{display:revert}
     <p class="lede">AI가 매번 SQL을 만들어 DB를 직접 읽게 두는 대신, 도메인 규칙이 이미 들어 있는 백엔드 API를 Tool로 부르게 바꿨습니다.</p>
     <p class="boundary"><b>역할 경계</b> &nbsp;AI 파이프라인 본체(워크플로우 · 프롬프트)는 AI 담당 동료 몫. 본인은 느린 원인 분석, 조회 방식 전환, Agent가 호출할 API Tool 제공</p>
 
-    <figure class="fig">
-      <div class="flow">
-        <span class="tag-l">전</span>
-        <div class="nd">Agent</div><div class="ar"></div>
-        <div class="nd hot">SQL 생성<small>매번 새로 만듦</small></div><div class="ar"></div>
-        <div class="nd hot">DB 직접 조회<small>느림 · 의도와 다른 데이터</small></div><div class="ar"></div>
-        <div class="nd">리포트<small>약 2분</small></div>
-      </div>
-      <div class="flow">
-        <span class="tag-l">후</span>
-        <div class="nd">Agent</div><div class="ar"></div>
-        <div class="nd key">REST API Tool<small>사전 정의</small></div><div class="ar"></div>
-        <div class="nd ok">백엔드 API<small>도메인 규칙 포함</small></div><div class="ar"></div>
-        <div class="nd ok">리포트<small>약 10초</small></div>
-      </div>
-      <figcaption>LangGraph 흐름에서 조회가 일어나는 지점만 Tool 호출로 바꾸고, 나머지 흐름은 그대로 둠</figcaption>
-    </figure>
+    <figure class="fig xd"><img src="assets/c04_ai.png" alt="전: Agent → SQL 생성 → DB 직접 조회 → 리포트 2분. 후: Agent → REST API Tool → 백엔드 API → 리포트 10초"><figcaption>LangGraph 흐름에서 조회가 일어나는 지점만 Tool 호출로 바꾸고, 나머지 흐름은 그대로 둠</figcaption></figure>
 
     <dl class="pjar">
       <dt>문제</dt><dd>리포트 1건 생성에 약 2분. Agent가 SQL을 생성해 DB를 직접 조회하는 구간이 느리고, 생성된 쿼리가 의도와 다른 데이터를 가져와 원하지 않는 답변이 나오는 상태</dd>
@@ -669,7 +632,7 @@ html.apply .apply-only{display:revert}
         <h3>일루미나리안</h3>
         <p class="when">2024 · 13명 팀 프로젝트 리드</p>
         <ul>
-          <li><b>리뷰 규칙</b>1명 이상 승인 후 머지 · 커버리지 80%를 제안해 팀과 정하고 Protection Rule로 강제<br><span class="to">→ KPT 회고 Keep: "코드리뷰가 개발 플로우의 일부로 자리잡았다"</span></li>
+          <li><b>리뷰 규칙</b>1명 이상 승인 후 머지 · 커버리지 80%를 제안해 팀과 정하고 Protection Rule로 강제, 스프린트 · KPT 회고 정례화</li>
           <li><b>검증과 배포 분리</b>배포 때마다 테스트 점검까지 돌던 흐름을, 검증은 PR(테스트 · OpenAPI · Sonar, 결과는 PR 댓글)에서 끝내고 배포는 배포만 하도록 팀과 함께 재설계<br><span class="to">→ 배포 1회 12분 → 4분</span></li>
           <li><b>배포 실행 단순화</b>머지 시 이미지 빌드, 배포는 환경 · 태그만 골라 실행<br><span class="to">→ 기획 · PM도 협의된 버전을 직접 반영</span></li>
         </ul>
@@ -687,35 +650,7 @@ html.apply .apply-only{display:revert}
       </div>
     </div>
 
-    <figure class="fig" style="margin-top:14px">
-      <p class="kick" style="margin-bottom:6px">일루미나리안 · 배포 흐름</p>
-      <div class="flow">
-        <span class="tag-l">전</span>
-        <div class="nd">머지</div><div class="ar"></div>
-        <div class="nd hot">테스트 · 검사<small>배포 때마다</small></div><div class="ar"></div>
-        <div class="nd">빌드</div><div class="ar"></div>
-        <div class="nd">배포<small>1회 12분</small></div>
-      </div>
-      <div class="flow">
-        <span class="tag-l">후</span>
-        <div class="nd key">PR에서 검증<small>테스트 · Sonar · 리뷰</small></div><div class="ar"></div>
-        <div class="nd">머지 시 이미지</div><div class="ar"></div>
-        <div class="nd ok">배포만<small>환경 · 태그 선택 · 4분</small></div>
-      </div>
-      <p class="kick" style="margin:14px 0 6px">디라이트 파트너 · 개발 · 배포 흐름</p>
-      <div class="flow">
-        <span class="tag-l">전</span>
-        <div class="nd hot">각자 PC에서 수정<small>형상관리 없음</small></div><div class="ar"></div>
-        <div class="nd">수동 빌드</div><div class="ar"></div>
-        <div class="nd hot">업체별 배포<small>업체마다 코드가 다름</small></div>
-      </div>
-      <div class="flow">
-        <span class="tag-l">후</span>
-        <div class="nd key">브랜치 · PR · 리뷰</div><div class="ar"></div>
-        <div class="nd">Docker 이미지</div><div class="ar"></div>
-        <div class="nd ok">CD 배포<small>같은 코드 기준</small></div>
-      </div>
-    </figure>
+    <figure class="fig xd"><img src="assets/c05_team.png" alt="일루미나리안 배포 흐름 전후, 디라이트 파트너 개발·배포 흐름 전후"></figure>
 
     <div class="take" style="margin-top:20px">
       <p class="kick">이 사례에서 가져가는 것</p>
@@ -732,10 +667,10 @@ html.apply .apply-only{display:revert}
     <h2 class="h2">그 밖에 한 일</h2>
     <div class="more">
       <div class="mi">
-        <h3>고객사 기간계 연동 일 배치 (AS400 · MSSQL)</h3><p class="when">디라이트 파트너 · 2025.06 ~</p>
+        <h3>기간계 연동: API 대신 멀티 데이터소스로 직접 입수</h3><p class="when">디라이트 파트너 · 2025.06 ~</p>
         <p><span class="k">문제</span>고객사가 API를 열 수 없어 생산계획 · 비가동 · 보전 · 불량 데이터 수집 불가</p>
-        <p><span class="k">조치</span>read-only 계정 · 별도 커넥션, 4종 일 배치, 유형 마스터로 재분류. 데이터 성격에 따라 멱등 적재(중복 skip)와 이력 보존형 갱신(is_latest) 구분</p>
-        <p><span class="k r">결과</span>운영계에 쓰기 없이 매일 동기화, 설비 실적과 기간계 계획 · 보전 이력을 같은 기준으로 대조</p>
+        <p><span class="k">조치</span>AS400(JT400) · MSSQL에 멀티 데이터소스로 read-only 직접 연결, 4종 일 배치, 유형 마스터로 재분류. 데이터 성격에 따라 멱등 적재(중복 skip)와 이력 보존형 갱신(is_latest) 구분</p>
+        <p><span class="k r">결과</span>API 없이 기간계 데이터를 매일 입수, 설비 실적과 기간계 계획 · 보전 이력을 같은 기준으로 대조</p>
       </div>
       <div class="mi">
         <h3>SaaS 전환 정부지원사업 기술 리딩</h3><p class="when">디라이트 파트너 · 2025.03 ~ 2026.02</p>
@@ -789,10 +724,10 @@ html.apply .apply-only{display:revert}
           <p><span class="k r">결과</span>2024년 일반 가입 약 5,000명, 소셜 가입 약 24,000명(같은 기간 마케팅 캠페인이 있어 단독 효과로 보지 않음)</p>
         </div>
         <div class="mi">
-          <h3>취약성 검사 · 모의해킹 결과 대응</h3><p class="when">일루미나리안 · 2024.03 ~ 04</p>
-          <p><span class="k">문제</span>로그아웃 후 세션 유지, 로그인 무제한 시도, 라이브러리 취약점 지적</p>
+          <h3>보안 점검 지적 사항 대응</h3><p class="when">일루미나리안 · 2024.03 ~ 04</p>
+          <p><span class="k">문제</span>로그아웃 후에도 인증 유지, 로그인 무제한 시도, 인증 라이브러리 취약점 지적</p>
           <p><span class="k">조치</span>로그아웃 API, 7회 실패 시 30분 잠금 · reCAPTCHA, 비밀번호 리셋 링크 10분</p>
-          <p><span class="k r">결과</span>oauth2-client 취약점 대응과 Spring Boot 업그레이드 후 v1.12.0 배포</p>
+          <p><span class="k r">결과</span>로그인 무제한 시도와 로그아웃 후 인증 유지를 막고, 취약한 인증 라이브러리는 Spring Boot 업그레이드로 해소</p>
         </div>
         <div class="mi">
           <h3>신용카드 투자 결제 연동 (North Capital + Stripe)</h3><p class="when">일루미나리안 · 2023 4분기</p>
@@ -804,7 +739,7 @@ html.apply .apply-only{display:revert}
           <h3>배치 서비스 AWS Lambda 이전</h3><p class="when">일루미나리안 · 2023.08 ~ 09</p>
           <p><span class="k">문제</span>배지 · 한도 알림 · 취소 기한 · 입금 리마인더 등 배치 약 17종을 별도 서비스로 운영</p>
           <p><span class="k">조치</span>EventBridge 스케줄, 로직은 백엔드 /api/batch/*, 미국 공휴일 갱신</p>
-          <p><span class="k r">결과</span>이전 완료, 미국 PT 기준 스케줄과 공휴일을 반영한 영업일 계산</p>
+          <p><span class="k r">결과</span>별도 배치 서비스 없이 Lambda로 운영, 미국 PT 기준 스케줄과 공휴일을 반영한 영업일 계산</p>
         </div>
         <div class="mi">
           <h3>N/O · A/O 이중 코드베이스 통합</h3><p class="when">일루미나리안 · 2024.11</p>
